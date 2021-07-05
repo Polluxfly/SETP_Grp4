@@ -1,4 +1,4 @@
-<?php require_once('Include/header.php'); ?>
+<?php require_once('Include/header-edit.php'); ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-5 m-auto">
