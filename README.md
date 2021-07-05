@@ -14,7 +14,8 @@ UOP SETP Group 4 Project
   ![image](https://user-images.githubusercontent.com/57469755/124485130-d753be80-ddde-11eb-913c-afc5427d8647.png)
 
 2. Go to https://code.visualstudio.com/Download to download VS code
-  2.1 It might require you to restart PC, please to do so
+  
+    2.1 It might require you to restart PC, please to do so
   
 3. Go to https://github.com/Polluxfly/SETP_Grp4 to Download Code as SETP_Grp4-main.Zip
   
