@@ -15,12 +15,17 @@ body {
 }
 
 .companylogo h1{
+    font-family:  'Hoefler Text', Georgia, 'Arial', serif;
+    font-weight: normal;
+    font-size: 24em;
+    letter-spacing: .2em;
+    line-height: 1.1em;
+    margin:0px;
+    text-transform: uppercase;
     padding: 22px 20px;
     height:80px;
     float: left;
-    font-size:24px;
     font-weight:bold;
-    text-transform:uppercase;
     color: #fff;
 }
 ul {
