@@ -26,7 +26,7 @@ body {
     height:80px;
     float: left;
     font-weight:bold;
-    color: light-blue;
+    font-color: light-blue;
 }
 ul {
     list-style: none;
@@ -73,7 +73,7 @@ h2  {
 }
 
 .register-left{
-    background-color:rgba(211,211,211,0.5);
+    color:#3FBF7F;
     padding:50px;
 }
 
