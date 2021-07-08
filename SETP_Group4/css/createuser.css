@@ -26,7 +26,7 @@ body {
     height:80px;
     float: left;
     font-weight:bold;
-    font-color: light-blue;
+    color: LightBlue;
 }
 ul {
     list-style: none;
