@@ -1,6 +1,5 @@
 <?php
 
-function OpenCon(){
  $dbhost = "sql6.freesqldatabase.com:3306";
  $dbuser = "sql6423581";
  $dbpass = "zjlFur9zEL";
