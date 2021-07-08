@@ -1,33 +1,29 @@
 
 body {
-    background: linear-gradient(rgba(240, 186, 131, 0.6),rgba(240, 186, 131, 0.6)),url(img/background.jpg);
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img/background.jpg);
     background-size: cover;
     background-position: center;
 }
 
 
-.companylogo img{
-    float:left;
-    padding-left:10px;
-    padding-top:10px;
-    width:60px;
-    height:60px;
+.companylogo img {
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 60px;
+    height: 60px;
 }
 
-.companylogo h1{
-    font-family:  'Hoefler Text', Georgia, 'Arial', serif;
-    font-weight: normal;
-    font-size: 24px;
-    letter-spacing: .2em;
-    line-height: 1.1em;
-    margin:0px;
-    text-transform: uppercase;
+.companylogo h1 {
     padding: 22px 20px;
-    height:80px;
+    height: 80px;
     float: left;
-    font-weight:bold;
-    
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
 }
+
 ul {
     list-style: none;
     float: right;
@@ -35,7 +31,7 @@ ul {
     padding: 0;
     display: flex;
     color: #fff;
-    text-decoration:none;
+    text-decoration: none;
 }
 
     ul li a {
@@ -47,34 +43,33 @@ ul {
         text-transform: uppercase;
     }
 
-    ul li a:hover {
-        background: rgba(0,0,0,0.5);
-        border-radius: 6px;
-        color: #fff;
-    }
+        ul li a:hover {
+            background: rgba(0,0,0,0.5);
+            border-radius: 6px;
+            color: #fff;
+        }
 
-h2  {
-
-    padding-bottom:30px;
+h2 {
+    padding-bottom: 30px;
 }
 
-.form-group{
-    padding-top:10px;
+.form-group {
+    padding-top: 10px;
 }
 
 .container {
     padding-top: 50px;
 }
 
-.register-box{
-    max-width:700px;
-    float:left;
-    margin:100px auto;
+.register-box {
+    max-width: 700px;
+    float: none;
+    margin: 100px auto;
 }
 
-.register-left{
-    background-color:LightBlue;
-    padding:50px;
+.register-left {
+    background-color: rgba(211,211,211,0.5);
+    padding: 50px;
 }
 
 .logout {
