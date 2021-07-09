@@ -6,9 +6,14 @@ session_start();
 
 
 <html>
+<style>
+body {
+  background-image: url("normalpage_back.jpg");
+}
+</style>
 <head>
 
-    <title>Milo Bing</title>
+    <title>OH, Hi YO !</title>
     <link href="css/createuser.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -16,7 +21,7 @@ session_start();
 
 <body>
         <a class="logout" href="logout.php"> LOGOUT </a>
-        <div class="companylogo"><img src="img/logo.png" alt="logo"><h1>Milo Bing Language Centre</h1></div>
+        <div class="companylogo"><img src="logo.png" alt="logo"></div>
         
         <div class="navigation">
             <ul>
@@ -24,7 +29,7 @@ session_start();
                 <li><a href="createuser.php">Registration</a></li>
                 <li><a href="profile.php">Student Profile</a></li>
                 <li><a href="#">Course Details</a></li>
-                <li><a href="#">Enrollment</a></li>
+                <li><a href="studentpaymentpage.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
                 <li><a href="#">Report</a></li>
 
@@ -38,14 +43,14 @@ session_start();
                     <h2>User Registration</h2>
                     <form action="userregistration.php" method="post">
                     <div class="form-group">
-                            <label>Role</label>
+                            <label>Role</label><br>
                             <select id="role" name="role">
                             <option value="Admin">Admin</option>
                             <option value="Student">Student</option>
                             </select>
                     </div>
                     <div class="form-group">
-                            <label>Status</label>
+                            <label>Status</label><br>
                             <select id="status" name="status">
                             <option value="Active">Active</option>
                             <option value="Graduated">Graduated</option>

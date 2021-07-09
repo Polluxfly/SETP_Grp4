@@ -2,9 +2,9 @@
 
 session_start();
 
-$con = mysqli_connect('localhost','root','');
+$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
-mysqli_select_db($con,'lms');
+mysqli_select_db($con,'sql6423581');
 
 $role=$_POST['role'];
 $username=$_POST['username'];
@@ -29,7 +29,7 @@ if ($num == 1){
 	header('location:studenthome.php');
 	}
 }else{
-	header('location:login.php?error=1');
+	header('location:index.php?error=1');
 }
 
 ?>
