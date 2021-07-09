@@ -1,6 +1,7 @@
 
+
 body {
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img/background.jpg);
+    background: linear-gradient(rgba(240, 186, 131, 0.6),rgba(240, 186, 131, 0.6)),url(img/background.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -15,14 +16,20 @@ body {
 }
 
 .companylogo h1{
+    font-family:  'Hoefler Text', Georgia, 'Arial', serif;
+    font-weight: normal;
+    font-size: 24px;
+    letter-spacing: .2em;
+    line-height: 1.1em;
+    margin:0px;
+    text-transform: uppercase;
     padding: 22px 20px;
     height:80px;
     float: left;
-    font-size:24px;
     font-weight:bold;
-    text-transform:uppercase;
-    color: #fff;
+    
 }
+
 ul {
     list-style: none;
     float: right;
