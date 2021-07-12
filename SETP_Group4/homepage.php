@@ -2,16 +2,21 @@
 
 session_start();
 if(!isset($_SESSION['username'])){
-    header('location:login.php');
+    header('location:index.php');
 }
 ?>
 
 
 
 <html>
+<style>
+body {
+  background-image: url("homepage_back.jpg");
+}
+</style>
 <head>
 
-    <title>Milo Bing</title>
+    <title>OH, Hi YO !</title>
     <link href="css/homepage.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -20,7 +25,7 @@ if(!isset($_SESSION['username'])){
 <body>
 
        <a class="logout" href="logout.php"> LOGOUT </a>
-        <div class="companylogo"><img src="img/logo.png" alt="logo"><h1>Milo Bing Language Centre</h1></div>
+        <div class="companylogo"><img src="logo.png" alt="logo"></div>
         
         <div class="navigation">
             <ul>
@@ -28,15 +33,18 @@ if(!isset($_SESSION['username'])){
                 <li><a href="createuser.php">Registration</a></li>
                 <li><a href="profile.php">Student Profile</a></li>
                 <li><a href="#">Course Details</a></li>
-                <li><a href="#">Enrollment</a></li>
+                <li><a href="studentpaymentpage.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
-                <li><a href="#">Report</a></li>
+                <li><a href="enquiry.php">Enquiries</a></li>
 
             </ul>
         </div>
     
 
-       <h1>Welcome <?php echo $_SESSION['username']; ?> !</h1>
+       <h1>Hello</h1><br><br>
+       <div class="blink">
+       <br><span><?php echo $_SESSION['username']; ?></span>
+       </div>
         
               
     </body>

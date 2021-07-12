@@ -6,10 +6,12 @@ $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL')
 
 mysqli_select_db($con,'sql6423581');
 
+error_reporting(0);
+
 $userid = "";
-$status = "";
 $username = "";
 $email = "";
+$password = "";
 $gender = "";
 $nationality = "";
 $mobile = "";
@@ -26,11 +28,12 @@ try{
 //get data from the form
 function getData()
 {
+
     $data = array();
-    $data[0]=$_POST['userid'];
-    $data[1]=$_POST['status'];
-    $data[2]=$_POST['username'];
-    $data[3]=$_POST['email'];
+    $data[0]=$_SESSION['userid'];
+    $data[1]=$_POST['username'];
+    $data[2]=$_POST['email'];
+    $data[3]=$_POST['password'];
     $data[4]=$_POST['gender'];
     $data[5]=$_POST['nationality'];
     $data[6]=$_POST['mobile'];
@@ -50,7 +53,7 @@ mysqli_select_db($con,'sql6423581');
 <html>
 <style>
 body {
-  background-image: url("normalpage_back.jpg");
+  background-image: url("studenthomepage_back.jpg");
 }
 </style>
 <head>
@@ -67,13 +70,10 @@ body {
         
         <div class="navigation">
             <ul>
-                <li><a href="homepage.php">Home Page</a></li>
-                <li><a href="createuser.php">Registration</a></li>
-                <li><a href="profile.php">Student Profile</a></li>
+                <li><a href="studenthome.php">Home Page</a></li>
+                <li><a href="studentprofile.php">My Profile</a></li>
                 <li><a href="#">Course Details</a></li>
-                <li><a href="studentpaymentpage.php">Enrollment</a></li>
-                <li><a href="#">Student Progress</a></li>
-                <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="#">My Progress</a></li>
 
             </ul>
         </div>
@@ -84,7 +84,7 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
-$update_query ="UPDATE `userinfo` SET status='$info[1]',username='$info[2]',email='$info[3]',gender='$info[4]',nationality='$info[5]',mobile='$info[6]',dob='$info[7]' WHERE userid = '$info[0]' and role='Student'";
+$update_query ="UPDATE `userinfo` SET username='$info[1]',email='$info[2]',password='$info[3]',gender='$info[4]',nationality='$info[5]',mobile='$info[6]',dob='$info[7]' WHERE userid = '$info[0]' and role='Student'";
 try{
     $update_result=mysqli_query($con,$update_query);
     if($update_result){
@@ -101,7 +101,7 @@ try{
 }
 
 //search
-if(isset($_POST['search']))
+if(isset($_SESSION['userid']))
 {   
     $info = getData();
     $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' and role='Student'";
@@ -114,9 +114,9 @@ if(isset($_POST['search']))
                 while($rows = mysqli_fetch_array($search_result))
                 {
                     $userid = $rows['userid'];
-                    $status = $rows['status'];
                     $username = $rows['username'];
                     $email = $rows['email'];
+                    $password = $rows['password'];
                     $gender = $rows['gender'];
                     $nationality = $rows['nationality'];
                     $mobile = $rows['mobile'];
@@ -133,26 +133,6 @@ if(isset($_POST['search']))
 		}
 }
 
-//delete
-if(isset($_POST['delete']))
-{
-    $info = getData();
-    $delete_query = "DELETE FROM `userinfo` WHERE userid = '$info[0]' and role='Student'";
-    try{
-     $delete_result= mysqli_query($con,$delete_query);
-     if($delete_result){
-      if(mysqli_affected_rows($con)>0)
-      {
-       echo("Student Deleted !");
-	  }else{
-       echo("Data Not Deleted");
-	  }
-	 }
-	}catch(Exception $ex){
-     echo ("Error in Delete".$ex ->getMessage());
-	}
-}
-
 
 
             ?></h3></div>
@@ -161,27 +141,45 @@ if(isset($_POST['delete']))
        <div class="search-box">
        <div class="row">
        <div class="col-md-6 update-left">
-       <form method="post" action="profile.php">
-       <h1> Search </h1>
-            <div class="form-group">
-            <input type="number" name="userid" class="form-control" placeholder="Student ID" value="<?php echo ($userid);?>"><br>
-            </div>
+       <form method="post" action="studentprofile.php">
 
-            <button class="btn4" name="search">Search</button><br>
+        <div class="content">
+        <div class="slider-wrapper">
+        <div class="slider">
+        <div class="slider-text1">Be a slow walker, but never walk back.</div>
+        <div class="slider-text2">Action is the foundation key to all success.</div>
+        <div class="slider-text3">Be the captain of your own soul.</div>
+
+        </div></div></div>
+
+
+        <div class = "daycounter"><h2>
+        <?php
+
+        $date=strtotime('December 31');
+        $remaining=$date-time();
+        $day_remaining=floor($remaining/ 86400);
+
+        echo "Graduate in $day_remaining days ! :)";
+
+        ?>
+        </h2></div>
+        
 
             </div>
 
 
             <div class="col-md-6 update-right">
-            <h1> Student Details </h1>
-            <div class="form-group">
-            <input type="text" name="status" class="form-control" placeholder="Student Status" value="<?php echo ($status);?>"><br>
-            </div>
+            <h1> Student ID : <?php echo ($userid);?> </h1><br>
+            <h5> My Profile</h5>
             <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="Student Name" value="<?php echo ($username);?>"><br>
             </div>
             <div class="form-group">
             <input type="text" name="email" class="form-control" placeholder="Student Email" value="<?php echo ($email);?>"><br>
+            </div>
+            <div class="form-group">
+            <input type="text" name="password" class="form-control" placeholder="Password" value="<?php echo ($password);?>"><br>
             </div>
             <div class="form-group">
             <input type="text" name="gender" class="form-control" placeholder="Student Gender" value="<?php echo ($gender);?>"><br>
@@ -198,7 +196,6 @@ if(isset($_POST['delete']))
 
             <button class="btn2" name="update">Update</button><br><br>
             
-            <button class="btn3" name="delete">Delete</button>
             
             
              
