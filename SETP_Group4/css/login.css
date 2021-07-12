@@ -1,37 +1,57 @@
 
 body {
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img/background.jpg);
     background-size: cover;
     background-position: center;
 }
 
 
 .companylogo img{
-    float:left;
-    padding-left:10px;
-    padding-top:10px;
-    width:60px;
-    height:60px;
+    padding-left:800px;
+    padding-top:220px;
+    width:1350px;
+    height:365px;
 }
 
-.companylogo h1{
+.companylogo h1 {
     padding: 22px 20px;
-    height:80px;
+    height: 80px;
     float: left;
-    font-size:24px;
-    font-weight:bold;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: Times, Times New Roman, serif;
     text-transform:uppercase;
-    color: #fff;
+    color: #000000;
 }
+
+
+.companylogo h2 {
+    padding: 25px 0px;
+    height: 80px;
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Times, Times New Roman, serif;
+    color: #393434;
+}
+
+
+.contactbox img {
+    padding-left: 820px;
+    padding-top: 10px;
+    width: 1380px;
+    height: 125px;
+}
+
 
 .container {
     padding-top: 50px;
 }
 
 .login-box{
-    max-width:700px;
-    float:none;
-    margin:150px auto;
+    padding-left:525px;
+    padding-right:0px;
+    padding-top:0px;
+    width:1580px;
 }
 
 .login-center{
@@ -49,3 +69,38 @@ body {
     .logout:hover {
         color: #fff;
     }
+
+
+    .error{
+        background:#F2DEDE;
+        color: #A94442;
+        padding:10px;
+        width:95%;
+        border-radius:5px;
+    }
+
+
+ul {
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #fff;
+    text-decoration: none;
+}
+
+    ul li a {
+        line-height: 80px;
+        color: rgb(0, 0, 0);
+        padding: 12px 30px;
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+        ul li a:hover {
+            background: rgba(0,0,0,0.5);
+            border-radius: 6px;
+            color: #fff;
+        }

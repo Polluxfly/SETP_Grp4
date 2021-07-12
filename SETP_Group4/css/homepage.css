@@ -1,17 +1,16 @@
 
 body {
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img/background.jpg);
     background-size: cover;
     background-position: center;
 }
 
 
-.companylogo img{
-    float:left;
-    padding-left:10px;
-    padding-top:10px;
-    width:60px;
-    height:60px;
+.companylogo img {
+    float: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    width: 430px;
+    height: 125px;
 }
 
 .companylogo h1{
@@ -51,22 +50,50 @@ ul {
 
 
 h1 {
-    padding: 300px 300px;
+    padding: 400px 400px;
     height: 80px;
-    text-align:center;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
+    text-align: center;
+    font-family: Arial clack;
+    color: #808080;
+}
+
+.homepic img {
+    padding-left: 500px;
+    padding-top: 0px;
+    width: 1450px;
+    height: 465px;
 }
 
 .logout {
     float: right;
     padding: 10px 10px;
-    font-size:10px;
-    color:#000000;
+    font-size: 10px;
+    color: #000000;
 }
 
 .logout:hover{
-    color:#fff;
+    color:#ff00ac;
+}
+
+.blink{
+    top:50%;
+    left:50%;
+    position:absolute;
+    transform: translate(-50%, -50%);
+}
+
+
+span{
+    font-size:4em;
+    letter-spacing:8px;
+    font-family: Arial clack;
+    text-transform: uppercase;
+    animation:blink 3s linear ;
+    color:#808080;
+}
+
+@keyframes blink{
+    0%{opacity:0;}
+    50%{opacity: 0.5;}
+    100%{opacity:1;}
 }
