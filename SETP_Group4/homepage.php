@@ -35,13 +35,16 @@ body {
                 <li><a href="#">Course Details</a></li>
                 <li><a href="studentpaymentpage.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
-                <li><a href="report.php">Report</a></li>
+                <li><a href="enquiry.php">Enquiries</a></li>
 
             </ul>
         </div>
     
 
-       <h1>Hi, <?php echo $_SESSION['username']; ?> !</h1>
+       <h1>Hello</h1><br><br>
+       <div class="blink">
+       <br><span><?php echo $_SESSION['username']; ?></span>
+       </div>
         
               
     </body>

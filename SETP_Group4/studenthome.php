@@ -2,7 +2,7 @@
 
 session_start();
 if(!isset($_SESSION['username'])){
-    header('location:login.php');
+    header('location:index.php');
 }
 ?>
 
@@ -30,17 +30,17 @@ body {
         <div class="navigation">
             <ul>
                 <li><a href="studenthome.php">Home Page</a></li>
-                <li><a href="studentprofile.php">Profile</a></li>
-                <li><a href="#">Payment Status</a></li>
-                <li><a href="#">Progress</a></li>
+                <li><a href="studentprofile.php">My Profile</a></li>
+                <li><a href="#">Course Details</a></li>
+                <li><a href="#">My Progress</a></li>
                 
 
             </ul>
         </div>
-    
-
-       <h1>Hi, <?php echo $_SESSION['username']; ?> !</h1>
-        
+       <h1>Hello</h1><br><br>
+       <div class="blink">
+       <br><span><?php echo $_SESSION['username']; ?></span>
+       </div>
               
     </body>
 

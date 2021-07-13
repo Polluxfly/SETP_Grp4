@@ -31,7 +31,7 @@ body {
                 <li><a href="#">Course Details</a></li>
                 <li><a href="studentpaymentpage.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
-                <li><a href="#">Report</a></li>
+                <li><a href="enquiry.php">Enquiries</a></li>
 
             </ul>
         </div>
@@ -41,20 +41,14 @@ body {
             <div class="row">
                 <div class="col-md-6 register-left">
                     <h2>User Registration</h2>
-                    <form action="userregistration.php" method="post">
+                    <form action="createuser.php" method="post">
+                     
+
                     <div class="form-group">
                             <label>Role</label><br>
                             <select id="role" name="role">
                             <option value="Admin">Admin</option>
                             <option value="Student">Student</option>
-                            </select>
-                    </div>
-                    <div class="form-group">
-                            <label>Status</label><br>
-                            <select id="status" name="status">
-                            <option value="Active">Active</option>
-                            <option value="Graduated">Graduated</option>
-                            <option value="Withdrawn">Withdrawn</option>
                             </select>
                     </div>
                         <div class="form-group">
@@ -83,9 +77,49 @@ body {
                         </div>
                         <div class="form-group">
                             <label>Date of Birth</label>
-                            <input type="date" name="dob" class="form-control" required>
+                            <input type="date" name="dob" class="form-control" required><br>
                         </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button class="btn2" name="insert">Register</button>
+                        
+                        <p class="msg">
+                        <?php
+
+
+$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+
+mysqli_select_db($con,'sql6423581');
+
+ $role = (isset($_POST['role']) ? $_POST['role'] : '');
+ $status = (isset($_POST['status']) ? $_POST['status'] : '');
+ $username = (isset($_POST['username']) ? $_POST['username'] : '');
+ $email = (isset($_POST['email']) ? $_POST['email'] : '');
+ $password = (isset($_POST['password']) ? $_POST['password'] : '');
+ $gender = (isset($_POST['gender']) ? $_POST['gender'] : '');
+ $nationality = (isset($_POST['nationality']) ? $_POST['nationality'] : '');
+ $mobile = (isset($_POST['mobile']) ? $_POST['mobile'] : '');
+ $dob = (isset($_POST['dob']) ? $_POST['dob'] : '');
+
+$s=" select * from userinfo where email='$email'";
+
+$result = mysqli_query($con,$s);
+
+$num = mysqli_num_rows($result);
+
+
+if(isset($_POST['insert'])){
+if ($num == 1){
+	echo" The Email is taken. Try another.";
+}else{
+	$reg=" INSERT INTO userinfo (role, status, username, email, password, gender, nationality, mobile, dob) 
+        VALUES ('$role','Active','$username','$email', '$password','$gender','$nationality','$mobile','$dob')";
+
+	mysqli_query ($con, $reg);
+	echo "Registration Successfully !";
+}
+}
+?></p>
+          
+
                     </form>
                 </div>
                 </div>
