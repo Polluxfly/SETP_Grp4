@@ -133,6 +133,38 @@ if(isset($_SESSION['userid']))
 		}
 }
 
+if(isset($_SESSION['userid']))
+{   
+    $info = getData();
+    $search_query = "SELECT * FROM `userinfo` WHERE username='$info[1]' and role='Student'";
+    $search_result = mysqli_query($con,$search_query);
+    
+        if($search_result)
+        {
+            if(mysqli_num_rows($search_result))
+            {
+                while($rows = mysqli_fetch_array($search_result))
+                {
+                    $userid = $rows['userid'];
+                    $username = $rows['username'];
+                    $email = $rows['email'];
+                    $password = $rows['password'];
+                    $gender = $rows['gender'];
+                    $nationality = $rows['nationality'];
+                    $mobile = $rows['mobile'];
+                    $dob = $rows['dob'];
+
+                   
+
+				}
+			}else{
+                    echo("Student Not Found !");     
+			}
+		} else {
+                echo("Error");  
+		}
+}
+
 
 
             ?></h3></div>
