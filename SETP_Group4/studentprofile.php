@@ -104,7 +104,7 @@ try{
 if(isset($_SESSION['userid']))
 {   
     $info = getData();
-    $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' and role='Student'";
+    $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' OR username='$info[1]' and role='Student'";
     $search_result = mysqli_query($con,$search_query);
     
         if($search_result)
@@ -132,6 +132,8 @@ if(isset($_SESSION['userid']))
                 echo("Error");  
 		}
 }
+
+
 
 
 
