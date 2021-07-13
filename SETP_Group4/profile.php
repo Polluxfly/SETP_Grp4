@@ -132,12 +132,64 @@ if(isset($_POST['search']))
                 echo("Error");  
 		}
 }
+		 
+		 
+if(isset($_POST['search']))
+{   
+    $info = getData();
+    $search_query = "SELECT * FROM `userinfo` WHERE username='$info[1]' and role='Student'";
+    $search_result = mysqli_query($con,$search_query);
+    
+        if($search_result)
+        {
+            if(mysqli_num_rows($search_result))
+            {
+                while($rows = mysqli_fetch_array($search_result))
+                {
+                    $userid = $rows['userid'];
+                    $status = $rows['status'];
+                    $username = $rows['username'];
+                    $email = $rows['email'];
+                    $gender = $rows['gender'];
+                    $nationality = $rows['nationality'];
+                    $mobile = $rows['mobile'];
+                    $dob = $rows['dob'];
+
+                   
+
+				}
+			}else{
+                    echo("Student Not Found !");     
+			}
+		} else {
+                echo("Error");  
+		}
+}
 
 //delete
 if(isset($_POST['delete']))
 {
     $info = getData();
     $delete_query = "DELETE FROM `userinfo` WHERE userid = '$info[0]' and role='Student'";
+    try{
+     $delete_result= mysqli_query($con,$delete_query);
+     if($delete_result){
+      if(mysqli_affected_rows($con)>0)
+      {
+       echo("Student Deleted !");
+	  }else{
+       echo("Data Not Deleted");
+	  }
+	 }
+	}catch(Exception $ex){
+     echo ("Error in Delete".$ex ->getMessage());
+	}
+}
+		 
+if(isset($_POST['delete']))
+{
+    $info = getData();
+    $delete_query = "DELETE FROM `userinfo` WHERE username = '$info[1]' and role='Student'";
     try{
      $delete_result= mysqli_query($con,$delete_query);
      if($delete_result){
@@ -168,6 +220,11 @@ if(isset($_POST['delete']))
             </div>
 
             <button class="btn4" name="search">Search</button><br>
+	       
+	    <input type="number" name="username" class="form-control" placeholder="Student Name" value="<?php echo ($username);?>"><br>
+            </div>
+
+            <button class="btn5" name="searchName">Search</button><br>
 
             </div>
 
