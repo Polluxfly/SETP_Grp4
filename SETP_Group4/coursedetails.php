@@ -1,10 +1,13 @@
 <?php
+//connect to mysql database
+try{
+    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+}catch(mysqli_Sql_Exception $ex)
+{
+    echo("error in connecting");
+}
 
-$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-$query = " select * from courseinfo";
 mysqli_select_db($con,'sql6423581');
-$result = mysqli_query($con, $query);
-
 ?>
 
 <html>
@@ -15,8 +18,8 @@ body {
 </style>
 <head>
 
-    <title>coursedetailspage</title>
-    <link href="css/createuser.css" rel="stylesheet" type="text/css" />
+    <title>OH, Hi YO !</title>
+    <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
 
@@ -32,109 +35,111 @@ body {
             <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="enrollment.php">Enrollment</a></li>
             <li><a href="#">Student Progress</a></li>
-            <li><a href="#">Report</a></li>
-
+            <li><a href="enquiry.php">Enquiries</a></li>
         </ul>
     </div>
-
+        
     <div class="container">
-        <div class="register-box">
-            <div class="row">
-                <div class="col-md-6 register-left">
-                    <h2>Course Details</h2>
-                    <form action="update.php" method="post">
-                    
-                        <div class="form-group">
-                                <label>Course Level</label>
-                                <select id="courselevel" name="level">
-                                <option value="1">N1</option>
-                                <option value="2">N2</option>
-                                <option value="3">N3</option>
-                                <option value="4">N4</option>
-                                <option value="5">N5</option>
-                                </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Duration (Month)</label>
-                            <input type="text" name="duration" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Teacher</label>
-                            <input type="text" name="teacher" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Batch</label>
-                            <input type="text" name="batch" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Connect to DB + Read data example -->
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card bg-dark text-white mt-5">
-                    <h3 class="text-center py-3"> Course List </h3>
-            </div>
-        </div>
-    </div>
-
+    <div class="search-box">
     <div class="row">
-        <div class="col"> 
-            <div class="card">
-                    <div class="card-title"></div>
+    <div class="col-md-6 enquiry-left">
+    <div class="messagebox"><h4> Add New Course </h4></div>
+    <form method="post" action="coursedetails.php">
+        <div class="form-group">
+            <label>Course Level: </label><br>
+            <select id="courselevel" name="courselevel">
+                <option value="N1">N1</option>
+                <option value="N2">N2</option>
+                <option value="N3">N3</option>
+                <option value="N4">N4</option>
+                <option value="N5">N5</option>
+            </select>
+        </div><br>
 
-                    <div class="card-body">
-                        <table class="table table-striped">
+        <div class="form-group">
+            <label>Duration (Month)</label>
+            <input type="text" name="duration" class="form-control" required>
+        </div><br>
+        <div class="form-group">
+            <label>Teacher</label>
+            <input type="text" name="teacher" class="form-control" required>
+        </div><br>
+        <div class="form-group">
+            <label>Batch</label>
+            <input type="text" name="batch" class="form-control" required>
+        </div><br>
 
-                            <tr>
-                                <a href="register.php" class="btn btn-primary mb-3">Add New Course</a>
-                            </tr>                            
-                            
-                            <tr class="bg-success text-white ">
-                                <td> Course ID </td>
-                                <td> Course Level </td>
-                                <td> Batch </td>
-                                <td> Duration </td>
-                                <td colspan="7"> Teacher </td>
-                            </tr>
+        <button type="submit" class="btn2" name="Add">Add</button>
 
-                            <?php 
-                                
-                                while($row=mysqli_fetch_assoc($result))
-                                {
-                                    $CourseID= $row['courseid'];
-                                    $CourseLevel = $row['courselevel'];
-                                    $Batch = $row['batch'];
-                                    $Duration = $row['duration'];
-                                    $Teacher = $row['teacher'];
-                                    
-                            ?>
-                                <tr>
-                                    <td><?php echo $CourseID ?></td>
-                                    <td><?php echo $CourseLevel ?></td>
-                                    <td><?php echo $Batch ?></td>
-                                    <td><?php echo $Duration ?></td>
-                                    <td><?php echo $Teacher ?></td>
-                                    <td><a href="view.php?success=<?php echo $CourseID ?>" class="btn btn-success btn-sm">View</a></td>
-                                    <td><a href="adminedit.php?edit=<?php echo $CourseID ?>" class="btn btn-primary btn-sm">Edit</a></td>
-                                    <td><a href="delete.php?Del=<?php echo $CourseID ?>" class="btn btn-danger btn-sm">Delete</a></td>
-                                </tr>
-                            
-                            <?php 
-                                }                          
-                            ?> 
-                        </table>
-                    </div>
-                </div>   
-            </div>
-        </div>
+<?php
+
+ $CourseLevel = (isset($_POST['courselevel']) ? $_POST['courselevel'] : '');
+ $Batch = (isset($_POST['batch']) ? $_POST['batch'] : '');
+ $Duration = (isset($_POST['duration']) ? $_POST['duration'] : '');
+ $Teacher = (isset($_POST['teacher']) ? $_POST['teacher'] : '');
+
+if(isset($_POST['Add'])){
+    $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher)
+        VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher')";
+try{
+	mysqli_query ($con, $query);
+	echo "Added Course Successfully!";
+    $query = "";
+}catch(Exception $ex){
+    echo("Error In Update".$ex->getMessage());
+}
+}
+
+?>
+    </form>
+      
+    <div class="wrap">
+        <table>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Level</th>
+                <th>Batch</th>
+                <th>Duration</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+
+            <?php
+                $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+                mysqli_select_db($con,'sql6423581');
+                if($con->connect_error){
+                die("Connection failed". $con->connect_error);  
+                }
+
+                $sql = " SELECT * from courseinfo";
+                $result = $con-> query($sql);
+
+                                             
+                while($row=mysqli_fetch_assoc($result))
+                {
+                    $CourseID= $row['courseid'];
+                    $CourseLevel = $row['courselevel'];
+                    $Batch = $row['batch'];
+                    $Duration = $row['duration'];
+                    $Teacher = $row['teacher'];
+                    
+            ?>
+            <tr>
+                <td><?php echo $CourseID ?></td>
+                <td><?php echo $CourseLevel ?></td>
+                <td><?php echo $Batch ?></td>
+                <td><?php echo $Duration ?></td>
+                <td><?php echo $Teacher ?></td>
+                <td>
+                    <a href="updatecourse.php?edit=<?php echo $CourseID ?>" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="deletecourse.php?Del=<?php echo $CourseID ?>" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            <?php 
+               }                          
+            ?> 
+        </table>
     </div>
-</body>
-
+</body>   
+       
 </html>
