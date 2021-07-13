@@ -104,7 +104,7 @@ try{
 if(isset($_POST['search']))
 {   
     $info = getData();
-    $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' and role='Student'";
+    $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' OR username='$info[1]' and role='Student'";
     $search_result = mysqli_query($con,$search_query);
     
         if($search_result)
@@ -137,7 +137,7 @@ if(isset($_POST['search']))
 if(isset($_POST['delete']))
 {
     $info = getData();
-    $delete_query = "DELETE FROM `userinfo` WHERE userid = '$info[0]' and role='Student'";
+    $delete_query = "DELETE FROM `userinfo` WHERE userid = '$info[0]'  OR username = '$info[1]' and role='Student'";
     try{
      $delete_result= mysqli_query($con,$delete_query);
      if($delete_result){
