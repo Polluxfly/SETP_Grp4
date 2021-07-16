@@ -27,7 +27,7 @@ body {
             <ul>
                 <li><a href="homepage.php">Home Page</a></li>
                 <li><a href="createuser.php">Registration</a></li>
-                <li><a href="profile.php">Student Profile</a></li>
+                <li><a href="profile.php">User Profile</a></li>
                 <li><a href="#">Course Details</a></li>
                 <li><a href="studentpaymentpage.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
