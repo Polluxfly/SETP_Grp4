@@ -290,3 +290,9 @@ h3 {
 }
 
 
+select {
+    width: 488px;
+    height:38px;
+    border-radius:4px;
+    border-color:#cecece;
+}
