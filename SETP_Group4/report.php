@@ -1,72 +1,104 @@
 <?php
-  include_once 'db.php';
+
+$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+$query = " select * from enrollmentinfo";
+mysqli_select_db($con,'sql6423581');
+$result = mysqli_query($con, $query);
+
 ?>
-<!doctype html>
+
 <html>
+<style>
+body {
+  background-image: url("normalpage_back.jpg");
+}
+</style>
 <head>
 
-    <title>Student Reports</title>
+    <title>Report</title>
     <link href="css/report.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 </head>
 
+
+
 <body>
+    <a class="logout" href="logout.php"> LOGOUT </a>
+    <div class="companylogo"><img src="logo.png" alt="logo"></div>
+    
+    <div class="navigation">
+        <ul>
+            <li><a href="homepage.php">Home Page</a></li>
+            <li><a href="createuser.php">Registration</a></li>
+            <li><a href="profile.php">Student Profile</a></li>
+            <li><a href="coursedetails.php">Course Details</a></li>
+            <li><a href="enrollment.php">Enrollment</a></li>
+            <li><a href="#">Student Progress</a></li>
+            <li><a href="#">Report</a></li>
 
-       <a class="logout" href="logout.php"> LOGOUT </a>
-        <div class="companylogo"><img src="Images/logo.png" alt="logo"><h1>Milo Bing Language Centre</h1></div>
+        </ul>
+    </div>
+    
 
-        <div class="navigation">
-            <ul>
-                <li><a href="homepage.php">Home Page</a></li>
-                <li><a href="createuser.php">Registration</a></li>
-                <li><a href="profile.php">Student Profile</a></li>
-                <li><a href="#">Course Details</a></li>
-                <li><a href="#">Enrollment</a></li>
-                <li><a href="#">Student Progress</a></li>
-                <li><a href="#">Report</a></li>
+    <!--Widget-->
+    <div class="card-body1">
+      <div class="float-left">
+        <h3>
+          <span class="students">Active</span> <!--revenue-->
+          <span class="count">10</span>
+        </h3>
+      </div>
+      <div class="float-right">
+        <i class="pe-7s-users"></i>
+      </div>
+    </div>
+    <!--Widget-->
+    
+    <!--Widget-->
+    <div class="card-body2">
+      <div class="float-left">
+        <h3>
+          <span class="students">Revenue $</span> <!--revenue-->
+          <span class="count">900</span>
+        </h3>
+      </div>
+      <div class="float-right">
+        <i class="pe-7s-piggy"></i>
+      </div>
+    </div>
+    <!--Widget-->
 
-            </ul>
-        </div>
-        <div class="data">
-          <form action="report.php" method="POST">
-            <select name="Courses" class="courses">
-              <option>Courses</option>
-              <?php
-                $query1 = "SELECT * FROM courses";
-                $result1 = mysql_query($query1);
-                while($rows1 = mysql_fetch_array($result1)){
-                  $courseID = $rows1['id'];
-                  $rowsdata1 = $rows1['courseName'];
-                ?>
-                  <option value="<?php echo $courseID; ?>"<?php echo $rowsdata1; ?></option>
-                <?php
-                }
-                ?>
-            </select>
+    <!--Widget-->
+    <div class="card-body3">
+      <div class="float-left">
+        <h3>
+          <span class="students">Withdrawn</span> <!--revenue-->
+          <span class="count">1</span>
+        </h3>
+      </div>
+      <div class="float-right">
+        <i class="pe-7s-less"></i>
+      </div>
+    </div>
+    <!--Widget-->
 
-            <select name="Level" class="level">
-              <option>Level</option>
-              <?php
-                $query2 = "SELECT * FROM level";
-                $result2 = mysql_query($query2);
-                while($rows2 = mysql_fetch_array($result2)){
-                  $rowsdata2 = $rows2['levelname'];
-                ?>
-                  <option value="<?php echo $levelname; ?>"<?php echo $levelname; ?></option>
-                <?php
-              }
-                ?>
-            </select>
+    <script type="text/javascript">
+    $('.count').each(function(){
+      $(this).prop('Counter', 0).animate({
+        Counter: $(this).text()
+      }, {
+        duration:4000,
+        easing: 'swing', 
+        step: function(now){
+          $(this).text(Math.ceil(now));
+    }
+  });
+});
+    </script>
 
-            <input type="submit" name="submit" class="submit"/>
-            <table border = "1" class="table">
-              <tr>
-                <th>Transcript</th>
-                <th>Score</th>
-                <th>Pass or Fail</th> <!--Find another term for this-->
-            </table>
-          </form>
-        </div>
-        </body>
 
-</html>
+</body>
+</html>   
