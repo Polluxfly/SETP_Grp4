@@ -193,8 +193,13 @@ if(isset($_POST['delete']))
                             </select>
             </div><br>
             <div class="form-group">
-            <input type="text" name="status" class="form-control" placeholder="User Status" value="<?php echo ($status);?>"><br>
-            </div>
+            <select id="status" name="status">
+                            <option><?php echo ($status);?></option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            </select>
+            </div><br>
+
             <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="User Name" value="<?php echo ($username);?>"><br>
             </div>

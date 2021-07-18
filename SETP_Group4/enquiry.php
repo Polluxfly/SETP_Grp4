@@ -41,11 +41,6 @@ function getData()
 
 mysqli_select_db($con,'sql6423581');
 
-
-
-
-
-
 ?>
 
 <html>
@@ -78,15 +73,14 @@ body {
 
             </ul>
         </div>
-         
-       
-       <div class="container">
-       <div class="search-box">
-       <div class="row">
-       
+        <div class = "container">
 
 
-            <div class="col-md-6 enquiry-left">
+
+            <section class = "section1"> 
+            
+
+
             <div class="messagebox"><h5>
         <?php
 
@@ -147,7 +141,10 @@ if(isset($_POST['search']))
 
 
             ?></h5></div>
-            <form method="post" action="enquiry.php">
+
+
+
+<form method="post" action="enquiry.php">
             <h4> Search </h4>
             <div class="form-group">
             <input type="number" name="enquiryid" class="form-control" placeholder="Enquiry ID" value="<?php echo ($enquiryid);?>"><br>
@@ -177,21 +174,31 @@ if(isset($_POST['search']))
             </div>
 
             <button class="btn2" name="update">Update</button><br><br>
-            
-           </div>     
+              
        </from>
-       </div>
-      
-       <div class="wrap">
-       <table>
+
+            </section>
+
+
+
+
+
+            <section class = "section2"> 
+            
+            
+            <div class = "container2">
+            <table class="table-scroll small-first-col">
+            <thead>
         <tr>
-        <th>Enquiry ID</th>
-        <th>Enquiry date</th>
+        <th>ID</th>
+        <th>Date</th>
         <th>Name</th>
-        <th>Enquiry Message</th>
+        <th>Messages</th>
         <th>Status</th>
         <th>Remarks</th>
-
+        </tr>
+       </thead>
+       <tbody class="body-half-screen">
         <?php
         $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
@@ -202,7 +209,7 @@ if(isset($_POST['search']))
         die("Connection failed". $con->connect_error);  
 		}
 
-        $sql = " SELECT * from enquiry ORDER BY status desc, date desc";
+        $sql = " SELECT enquiryid,name, email, mobile, enquiry, DATE_FORMAT(date, '%M %d %Y') as date, status, action from enquiry WHERE status='Pending' ORDER BY status desc, date desc, enquiryid desc";
         $result = $con-> query($sql);
         if($result-> num_rows > 0){
           while ($row = $result -> fetch_assoc()){
@@ -216,7 +223,7 @@ if(isset($_POST['search']))
             </tr>";  
 		  }  
 
-          echo "</table>";
+          echo "</tbody></table>";
 		  }
           else{
           echo "0 result";
@@ -226,11 +233,73 @@ if(isset($_POST['search']))
 
         ?>
 
-        </tr>
-        </table>
         </div>
-       </div>
-       </div>
-       </div>
-       
+
+
+        <br>
+
+        <div class = "container2">
+            <table class="table-scroll2 small-first-col">
+            <thead>
+        <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Messages</th>
+        <th>Status</th>
+        <th>Remarks</th>
+        </tr>
+       </thead>
+       <tbody class="body-half-screen">
+        <?php
+        $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+
+        mysqli_select_db($con,'sql6423581');
+
+
+        if($con->connect_error){
+        die("Connection failed". $con->connect_error);  
+		}
+
+        $sql = " SELECT enquiryid,name, email, mobile, enquiry, DATE_FORMAT(date, '%M %d %Y') as date, status, action from enquiry WHERE status='Completed' ORDER BY status desc, date desc, enquiryid desc";
+        $result = $con-> query($sql);
+        if($result-> num_rows > 0){
+          while ($row = $result -> fetch_assoc()){
+            echo "<tr>
+            <td>".$row["enquiryid"] ."</td>
+            <td>".$row["date"] ."</td>
+            <td>". $row["name"]."</td>
+            <td>". $row["enquiry"] ."</td>
+            <td>". $row["status"]."</td>
+            <td>". $row["action"]."</td>
+            </tr>";  
+		  }  
+
+          echo "</tbody></table>";
+		  }
+          else{
+          echo "0 result";
+		}
+
+        $con-> close();
+
+        ?>
+
+        </div>
+
+
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+        </div>
+</body>
 </html>

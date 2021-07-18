@@ -84,7 +84,7 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
-$update_query ="UPDATE `userinfo` SET username='$info[1]',email='$info[2]',password='$info[3]',gender='$info[4]',nationality='$info[5]',mobile='$info[6]',dob='$info[7]' WHERE userid = '$info[0]' and role='Student'";
+$update_query ="UPDATE `userinfo` SET email='$info[2]',password='$info[3]',mobile='$info[6]' WHERE userid = '$info[0]' and role='Student'";
 $check = "SELECT * from `userinfo` where userid <> '$info[0]' and email='$info[2]'";
 
 $check_result= mysqli_query($con, $check);
@@ -158,27 +158,20 @@ if(isset($_SESSION['userid']))
        <div class="col-md-6 update-left">
        <form method="post" action="studentprofile.php">
 
-        <div class="content">
-        <div class="slider-wrapper">
-        <div class="slider">
-        <div class="slider-text1">Be a slow walker, but never walk back.</div>
-        <div class="slider-text2">Action is the foundation key to all success.</div>
-        <div class="slider-text3">Be the captain of your own soul.</div>
+        <div class="notification">
+        <br><br>
+        <p><b>Dear <?php echo ($username);?>,</b></p><br>
+        <i>
+        <p>In compliance with the recent Covid-19 directives from the government , please take note of the following updates.</p>
+        <p>Our school is working towards resuming lessons back to physical classrooms. </p>
+        <p>The government has highlighted that more people may be allowed to return to the workplace sometime around from the middle of August.</p> 
+        <p>Our school aims to resume back physical classes which may occur from the middle of  August<p>  
+        <p>Your teacher will keep you updated.</p>
+        <br><br>
+        <p><b>Stay safe!</b></p> 
+        <p><b>OH, Hi YO! Management</b></p> </i>
+       </div>
 
-        </div></div></div>
-
-
-        <div class = "daycounter"><h2>
-        <?php
-
-        $date=strtotime('December 31');
-        $remaining=$date-time();
-        $day_remaining=floor($remaining/ 86400);
-
-        echo "Graduate in $day_remaining days ! :)";
-
-        ?>
-        </h2></div>
         
 
             </div>
@@ -186,28 +179,26 @@ if(isset($_SESSION['userid']))
 
             <div class="col-md-6 update-right">
             <h1> Student ID : <?php echo ($userid);?> </h1><br>
-            <h5> My Profile</h5>
+            <h5> My Profile</h5><br>
+
+            <p class="row">Name : <?php echo ($username);?></p>
+            <p class="row">Gender : <?php echo ($gender);?></p>
+            <p class="row">Nationality : <?php echo ($nationality);?></p>
+            <p class="row">Date of Birth : <?php echo ($dob);?></p>
+
             <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Student Name" value="<?php echo ($username);?>"><br>
-            </div>
-            <div class="form-group">
+            <label>Email:</label>
             <input type="text" name="email" class="form-control" placeholder="Student Email" value="<?php echo ($email);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="password" class="form-control" placeholder="Password" value="<?php echo ($password);?>"><br>
-            </div>
-            <div class="form-group">
-            <input type="text" name="gender" class="form-control" placeholder="Student Gender" value="<?php echo ($gender);?>"><br>
-            </div>
-            <div class="form-group">
-            <input type="text" name="nationality" class="form-control" placeholder="Student Nationality" value="<?php echo ($nationality);?>"><br>
-            </div>
-            <div class="form-group">
+            <label>Mobile:</label>
             <input type="text" name="mobile" class="form-control" placeholder="Student Mobile Number" value="<?php echo ($mobile);?>"><br>
             </div>
             <div class="form-group">
-            <input type="date" name="dob" class="form-control" placeholder="Student Date of Birth" value="<?php echo ($dob);?>"><br>
+            <label>Password:</label>
+            <input type="text" name="password" class="form-control" placeholder="Password" value="<?php echo ($password);?>"><br>
             </div>
+            
 
             <button class="btn2" name="update">Update</button><br><br>
             
