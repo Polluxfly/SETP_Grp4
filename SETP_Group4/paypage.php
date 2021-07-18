@@ -11,6 +11,7 @@ body {
     <link href="css/paypage.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
 </head>
 
 
@@ -26,10 +27,15 @@ body {
         </div>
         
        <div class="blink">
-       <br><span>Check out</span>
+       <br>
+       <span>
+        <h2 style="text-align: center;">Check out</h2>
+        <h3 style="text-align: center;">Choose a payment for your "Course"</h3>
+       </span>
        </div>
 
 	<div class="PaymentContainer">
+        <img src="visa_master.png" alt="visa_master_logo">
         <form action="charge.php" method="post" id="payment-form">
         <div class="form-row">
         <input type="text" name="first_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="First Name">
@@ -43,12 +49,22 @@ body {
       </div>
       <button>Submit Payment</button>
     </form>
-  </div>
+       
+    </div>
+    <div class="apple-payment-request-button">
+      <img src="button-pay-with-apple.png" alt="button-pay-with-apple-logo">
+    </div>
 
-
+    <div id="googlepay-button" class="googlepay-button">
+    </div>
+         
+        <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://js.stripe.com/v3/"></script>
         <script src="./js/charge.js"></script>
-
+        <script src="./js/googlepay.js"></script>
+         
 </body>
 </html>
+
+<!--vhja-kxyq-bxyn-snoj-cqof-->
