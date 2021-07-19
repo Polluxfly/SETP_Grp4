@@ -1,10 +1,6 @@
 body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(0, 0, 34);
-    font-size: 0.8rem
+    background-size:cover;
+    background-position: center;
 }
 
 .card {
@@ -12,14 +8,68 @@ body {
     margin: 2vh
 }
 
-.card-top {
-    padding: 0.7rem 5rem
+.companylogo img {
+    float: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    width: 430px;
+    height: 125px;
 }
 
-.card-top a {
+.companylogo h1{
+    padding: 22px 20px;
+    height:80px;
     float: left;
-    margin-top: 0.7rem
+    font-size:24px;
+    font-weight:bold;
+    text-transform:uppercase;
+    color: #fff;
 }
+ul {
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #fff;
+    text-decoration:none;
+}
+
+    ul li a {
+        line-height: 80px;
+        color: rgb(0, 0, 0);
+        padding: 12px 30px;
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    ul li a:hover {
+        background: rgba(0,0,0,0.5);
+        border-radius: 6px;
+        color: #fff;
+    }
+
+.logout {
+    float: right;
+    padding: 10px 10px;
+    font-size: 10px;
+    color: #000000;
+}
+
+    .logout:hover {
+        color: #ff00ac;
+    }
+
+
+.card-top {
+    padding: 0.7rem 5rem;
+}
+
+    .card-top a {
+        float: left;
+        margin-top: 0.7rem
+    }
 
 #logo {
     font-family: 'Dancing Script';
@@ -37,7 +87,7 @@ body {
 @media(max-width:768px) {
     .card-body {
         padding: 0 1rem 1rem 1rem;
-        background-image: url(""); 
+        background-image: url("");
         background-size: cover;
         background-repeat: no-repeat
     }
@@ -92,9 +142,9 @@ input {
     background-color: rgb(247, 247, 247)
 }
 
-input:focus::-webkit-input-placeholder {
-    color: transparent
-}
+    input:focus::-webkit-input-placeholder {
+        color: transparent
+    }
 
 .header {
     font-size: 1.5rem
@@ -105,13 +155,13 @@ input:focus::-webkit-input-placeholder {
     padding: 2vh
 }
 
-.left img {
-    width: 2rem
-}
+    .left img {
+        width: 2rem
+    }
 
-.left .col-4 {
-    padding-left: 0
-}
+    .left .col-4 {
+        padding-left: 0
+    }
 
 .right .item {
     padding: 0.3rem 0
@@ -141,28 +191,28 @@ input:focus::-webkit-input-placeholder {
     border-radius: 0
 }
 
-.btn:focus {
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none
-}
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        -webkit-user-select: none;
+        transition: none
+    }
 
-.btn:hover {
-    color: white
-}
+    .btn:hover {
+        color: white
+    }
 
 a {
     color: black
 }
 
-a:hover {
-    color: black;
-    text-decoration: none
-}
+    a:hover {
+        color: black;
+        text-decoration: none
+    }
 
 input[type=checkbox] {
     width: unset;
@@ -176,4 +226,5 @@ input[type=checkbox] {
     background-position-y: center
 }
 
-#cvv:hover {}
+    #cvv:hover {
+    }
