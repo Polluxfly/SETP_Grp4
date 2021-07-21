@@ -175,7 +175,7 @@ if(isset($_POST['delete']))
        <h1> Search </h1>
             <div class="form-group">
             <input type="number" name="userid" class="form-control" placeholder="Student ID" value="<?php echo ($userid);?>"><br>
-            <input type="email" name="email2" class="form-control" placeholder="Student Email" value="<?php echo ($email2);?>"><br>
+            <input type="email" name="name2" class="form-control" placeholder="Student Name" value="<?php echo ($name2);?>"><br>
             </div>
 
             <button class="btn4" name="search">Search</button><br>
