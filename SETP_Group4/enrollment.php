@@ -7,12 +7,36 @@
    	}
    
    $loginuser = $_SESSION['userid'];
-   	
    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-   $query = " SELECT * FROM `enrollmentinfo` WHERE userid='$loginuser'; ";
    mysqli_select_db($con,'sql6423581');
+   
+   $query = " SELECT *
+              FROM enrollmentinfo AS e
+              INNER JOIN courseinfo AS c 
+              ON e.courseid = c.courseid
+              INNER JOIN userinfo AS u
+              ON e.userid = u.userid
+              WHERE c.status = '1' AND u.status = 'Active' AND u.userid = '$loginuser'";
+
    $result = mysqli_query($con, $query);
    
+   while($row=mysqli_fetch_assoc($result)) {
+					  if($row['userid'] != $loginuser)
+					  {
+				      continue;
+					  }
+					  $user_name = $row['username'];
+					  $EnrollmentID= $row['enrollmentid'];
+                      $CourseID= $row['courseid'];
+                      $CourseLevel = $row['courselevel'];
+					  $CourseFee = $row['coursefee'];
+					  $Status = $row['paystatus'];
+                      if($row['paystatus'] == 0)
+                        $Status = "Not Yet";
+                      else
+                        $Status = "Paid";     
+					 }
+	
    ?>
 <html>
    <style>
@@ -42,48 +66,30 @@
             <div class="col-sm">
                <div class="">
 			   <span>
-                  <h1>Enroll in a course now ! <?php echo $_SESSION['username'] ?></h1>
+                  <h1>Enroll in a course now ! <?php echo $user_name; ?></h1>
                </span>
 			   </div>
             </div>
             <div class="col-sm">
-			  <div class="wrap">
+			  <div class="">
                <table class="">
                   <tr class="">
                      <td> Enrollment ID </td>
                      <td> Course ID </td>
                      <td> Course Level </td>
-                     <td colspan="7"> Status </td>
+					 <td> Course Fee </td>
+                     <td> Status </td>
+					 <td> Pay </td>
                   </tr>
-                  <?php 
-                     while($row=mysqli_fetch_assoc($result))
-                     {
-                         $EnrollmentID= $row['enrollmentid'];
-                         /*$UserID= $row[$_SESSION['userid']];*/
-                         $CourseID= $row['courseid'];
-                         $CourseLevel = $row['courselevel'];
-                         $PaymentStatus = $row['paystatus'];
-                         
-                         
-                     ?>
                   <tr>
                      <td><?php echo $EnrollmentID ?></td>
                      <td><?php echo $CourseID ?></td>
                      <td><?php echo $CourseLevel ?></td>
-                     <td><?php if ($PaymentStatus == 1) : ?>
-                        <a href="studenthome.php"> Paid </a>
-                        <?php else : ?>
-                        <a href="paypage.php"> Not Yet </a> 
-                        <?php endif; ?>
-                     </td>
-                     <!--td><a href="view.php?success=<?php echo $EnrollmentID ?>" class="btn btn-success btn-sm">View</a></td>
-                        <td><a href="adminedit.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a></td>
-                        <td><a href="delete.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a></td-->
+					 <td><?php echo $CourseFee ?></td>
+                     <td><?php echo $Status ?></td>
+					 <td><?php if($Status == 'Not Yet'){ echo "<a href=\"paypage.php\" class=\"btn btn-primary btn-sm\" style=\"right: 50px\" >Pay</a>"; }?></td>
                   </tr>
-                  <?php 
-                     }                          
-                     ?> 
-               </table>
+			   </table>
 			   </div>
             </div>
          </div>
@@ -93,4 +99,3 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
    </body>
 </html>
-
