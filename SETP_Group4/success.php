@@ -1,4 +1,4 @@
-<?php
+<!--?php
     if(!empty($_GET['tid'] && !empty($_GET['product']))) {
         $GET = filter_var_array($_GET, FILTER_SANITIZE_STRING);
 
@@ -8,7 +8,7 @@
     else {
         header('Location: homepage.php');
     }
-?>
+?-->
 
 <html>
 <style>
@@ -31,12 +31,12 @@ body {
 
         <div class="container mt-4">
         <span>
-	<h2> Thank you for purchasing <?php echo $product; ?></h2>
+	<h2> Thank you for purchasing</h2>
         <hr>
-        <p>Your transaction ID is <?php echo $tid; ?></p>
+        <p>Your purchase is successful</p>
         <p>Check your email for the invoice</p>
 	<p><a href="homepage.php" class="clickme">Back to homepage</p>
         </span>  
-    </div>
+   	</div>
 </body>
 </html>
