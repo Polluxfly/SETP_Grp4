@@ -20,23 +20,20 @@
 
    $result = mysqli_query($con, $query);
    
-   while($row=mysqli_fetch_assoc($result)) {
-					  if($row['userid'] != $loginuser)
-					  {
-				      continue;
-					  }
-					  $user_name = $row['username'];
-					  $EnrollmentID= $row['enrollmentid'];
-                      $CourseID= $row['courseid'];
-                      $CourseLevel = $row['courselevel'];
-					  $CourseFee = $row['coursefee'];
-					  $Status = $row['paystatus'];
-                      if($row['paystatus'] == 0)
-                        $Status = "Not Yet";
-                      else
-                        $Status = "Paid";     
-					 }
-	
+	if($result->num_rows>0)
+	{
+		while($row=$result->fetch_assoc())
+		{
+			$user_name = $row['username'];
+			$EnrollmentID= $row['enrollmentid'];
+			$CourseID= $row['courseid'];
+			$CourseLevel = $row['courselevel'];
+			$CourseFee = $row['coursefee'];
+			$Status = $row['paystatus'];
+   
+			}
+		}
+
    ?>
 <html>
    <style>
@@ -72,22 +69,45 @@
             </div>
             <div class="col-sm">
 			  <div class="">
-               <table class="">
-                  <tr class="">
-                     <td> Enrollment ID </td>
-                     <td> Course ID </td>
-                     <td> Course Level </td>
-					 <td> Course Fee </td>
-                     <td> Status </td>
-					 <td> Pay </td>
-                  </tr>
-                  <tr>
-                     <td><?php echo $EnrollmentID ?></td>
-                     <td><?php echo $CourseID ?></td>
-                     <td><?php echo $CourseLevel ?></td>
-					 <td><?php echo $CourseFee ?></td>
-                     <td><?php echo $Status ?></td>
-					 <td><?php if($Status == 'Not Yet'){ echo "<a href=\"paypage.php\" class=\"btn btn-primary btn-sm\" style=\"right: 50px\" >Pay</a>"; }?></td>
+			  <?php
+				$SQL = 	" SELECT *
+						  FROM enrollmentinfo AS e
+						  INNER JOIN courseinfo AS c 
+						  ON e.courseid = c.courseid
+						  INNER JOIN userinfo AS u
+						  ON e.userid = u.userid
+						  WHERE c.status = '1' AND u.status = 'Active' AND u.userid = '$loginuser'";
+
+				$result = mysqli_query($con, $SQL) or die('A error occured: ');
+				$number_of_rows = mysqli_num_rows($result);
+					echo '<table>';
+					echo '<tr>';
+					echo '  <th>Enrollment ID </th>';
+					echo '  <th>Course ID </th>';
+					echo '  <th>Course Level </th>';
+					echo '  <th>Course Fee </th>';
+					echo '  <th>Pay Status </th>';
+					echo '</tr>';
+
+					while ($Row = mysqli_fetch_assoc($result)) {
+							echo '<tr>';
+							echo '<td>' . $Row['enrollmentid'] . '</td>';
+							echo '<td>' . $Row['courseid'] . '</td>';
+							echo '<td>' . $Row['courselevel'] . '</td>';
+							echo '<td>' . $Row['coursefee'] . '</td>';
+							if ($Status == 'Not Yet')
+					           { 
+					           echo "<td><a href=\"paypage.php\" class=\"btn btn-primary btn-sm\" style=\"right: 50px\" >Pay</a></td>"; 
+							   } 
+							   else
+							   { 
+						       echo"<td><a href=\"enrollment.php\" class=\"btn btn-primary btn-sm\" style=\"right: 50px\" >Paid</a></td>";
+							   }
+							echo '</tr>';
+					}
+					echo '</table>';
+				
+			 ?>                    
                   </tr>
 			   </table>
 			   </div>
