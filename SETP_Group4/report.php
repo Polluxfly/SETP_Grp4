@@ -4,18 +4,18 @@ $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL')
 mysqli_select_db($con,'sql6423581');
 
 // rows for status active
-$active_result = "SELECT * FROM userinfo WHERE status = 'Active'"; 
+$active_result = "SELECT * FROM userinfo WHERE status = 'Active' and role = 'Student'"; 
 if ($a_result=mysqli_query($con,$active_result)) {
     $a_rowcount=mysqli_num_rows($a_result);
 }
 
 // rows for status withdrawn
-$withdrawn_result = "SELECT * FROM `userinfo` where status = 'Withdrawn'"; 
+$withdrawn_result = "SELECT * FROM `userinfo` where status = 'Withdrawn' and role = 'Student'"; 
 if ($w_result=mysqli_query($con,$withdrawn_result)) {
     $w_rowcount=mysqli_num_rows($w_result);
 }
 // rows for status graduated
-$graduated_result = "SELECT * FROM `userinfo` where status = 'Graduated'"; 
+$graduated_result = "SELECT * FROM `userinfo` where status = 'Graduated' and role = 'Student'"; 
 if ($g_result=mysqli_query($con,$graduated_result)) {
     $g_rowcount=mysqli_num_rows($g_result);
 }
