@@ -62,7 +62,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>User Profile</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -77,10 +77,10 @@ body {
                 <li><a href="homepage.php">Home Page</a></li>
                 <li><a href="createuser.php">Registration</a></li>
                 <li><a href="profile.php">User Profile</a></li>
-                <li><a href="#">Course Details</a></li>
-                <li><a href="studentpaymentpage.php">Enrollment</a></li>
-                <li><a href="#">Student Progress</a></li>
+                <li><a href="coursedetails.php">Course Details</a></li>
+                <li><a href="adminenrollment.php">Enrollment</a></li>
                 <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="report.php">Management Reports</a></li>
 
             </ul>
         </div>
@@ -196,7 +196,8 @@ if(isset($_POST['delete']))
             <select id="status" name="status">
                             <option><?php echo ($status);?></option>
                             <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
+                            <option value="Graduated">Graduated</option>
+                            <option value="Withdrawn">Withdrawn</option>
                             </select>
             </div><br>
 

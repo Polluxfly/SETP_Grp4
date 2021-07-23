@@ -58,7 +58,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>My Profile</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -72,8 +72,7 @@ body {
             <ul>
                 <li><a href="studenthome.php">Home Page</a></li>
                 <li><a href="studentprofile.php">My Profile</a></li>
-                <li><a href="#">Course Details</a></li>
-                <li><a href="#">My Progress</a></li>
+                <li><a href="enrollment.php">Course Details</a></li>
 
             </ul>
         </div>
