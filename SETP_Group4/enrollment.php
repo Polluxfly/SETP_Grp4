@@ -25,14 +25,9 @@
 		while($row=$result->fetch_assoc())
 		{
 			$user_name = $row['username'];
-			$EnrollmentID= $row['enrollmentid'];
-			$CourseID= $row['courseid'];
-			$CourseLevel = $row['courselevel'];
-			$CourseFee = $row['coursefee'];
-			$Status = $row['paystatus'];
-   
-			}
+
 		}
+	}
 
    ?>
 <html>
@@ -95,7 +90,7 @@
 							echo '<td>' . $Row['courseid'] . '</td>';
 							echo '<td>' . $Row['courselevel'] . '</td>';
 							echo '<td>' . $Row['coursefee'] . '</td>';
-							if ($Status == 'Not Yet')
+							if ($Row['paystatus'] == '0')
 					           { 
 					           echo "<td><a href=\"paypage.php\" class=\"btn btn-primary btn-sm\" style=\"right: 50px\" >Pay</a></td>"; 
 							   } 
