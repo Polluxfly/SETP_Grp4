@@ -1,13 +1,3 @@
-<?php
-//connect to mysql database
-// try{
-//     $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-// }catch(mysqli_Sql_Exception $ex)
-// {
-//     echo("error in connecting");
-// }
-?>
-
 <html>
 <style>
 body {
@@ -39,58 +29,71 @@ body {
         
     <div class="container">
     <section class="section1">
-    <div class="messagebox"><h4> New Enrollment </h4></div>
-    <form method="post" action="coursedetails.php">
+        <div class="messagebox"><h4> New Enrollment </h4></div>
+        <form method="post" action="adminenrollment.php">
 
-        <div class="form-group">
-            <label>Course ID</label>
-            <input type="int" name="courseid" class="form-control" required>
-        </div><br>
-        <div class="form-group">
-            <label>Student ID</label>
-            <input type="int" name="studentid" class="form-control" required>
-        </div><br>
+            <div class="form-group">
+                <label>Course ID</label>
+                <input type="int" name="courseid" class="form-control" required>
+            </div><br>
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="int" name="userid" class="form-control" required>
+            </div><br>
 
-        <button type="submit" class="btn2" name="Add">Add</button>
- 
-<?php
+            <button type="submit" class="btn2" name="Add">Add</button><br><br><br><br>
 
-$Status = (isset($_POST['status']) ? $_POST['status'] : '');
-$CourseLevel = (isset($_POST['courselevel']) ? $_POST['courselevel'] : '');
-$Batch = (isset($_POST['batch']) ? $_POST['batch'] : '');
-$Duration = (isset($_POST['duration']) ? $_POST['duration'] : '');
-$Teacher = (isset($_POST['teacher']) ? $_POST['teacher'] : '');
-$CourseFee = (isset($_POST['coursefee']) ? $_POST['coursefee'] : '');
+ <?php
+$CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : '');
+$UserID = (isset($_POST['userid']) ? $_POST['userid'] : '');
 
 $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
 mysqli_select_db($con,'sql6423581');
 
-
 if($con->connect_error){
-die("Connection failed". $con->connect_error);  
+    die("Connection failed". $con->connect_error);  
 }
 
-
 if(isset($_POST['Add'])){
-    $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher, status, coursefee)
-        VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher', $Status,  '$CourseFee')";
+    $query ="INSERT INTO `enrollmentinfo` (`courseid`, `userid`, `paystatus`)
+     VALUES ('$CourseID', '$UserID', b'0')";
 try{
-    $result=$con -> query($query);
+    $result=mysqli_query($con,$query);
     if($result){
-     if(mysqli_affected_rows($con)>0)
-     {
-      echo("New Course Added!");
-	 }else{
-      echo("Failed to add Course!");
-     }
+        if(mysqli_affected_rows($con)>0)
+        {
+            echo("New Enrollment Added!");
+        }else{
+            echo("Failed to add Enrollment!");
+        }
     }
 }catch(Exception $ex){
     echo("Error In Update".$ex->getMessage());
 }
 }
 ?>
-   </form>
+        </form>
+        <form method="post" action="adminenrollment.php">
+            <div class="messagebox"><h4> Search Enrollment </h4></div>
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="int" name="studentid" class="form-control" required>
+            </div><br>
+            <button type="submit" class="btn2" name="Search">Search</button>
+        </form>
+
+
+<?php
+$StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : '');
+if(isset($_POST['Search'])){
+    $StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : '');
+    echo($StudentID);
+    header("location:searchenrollment.php?Sea=$StudentID");
+}
+
+echo($StudentID);
+?>
     </section>
      
     <section class="section2">
@@ -114,7 +117,7 @@ try{
                 $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
                 mysqli_select_db($con,'sql6423581');
                 if($con->connect_error){
-                die("Connection failed". $con->connect_error);  
+                    die("Connection failed". $con->connect_error);  
                 }
 
                 $sql = " SELECT *
@@ -129,16 +132,16 @@ try{
                                              
                 while($row=mysqli_fetch_assoc($result))
                 {
+                    $StudentID = $row['userid'];
                     $EnrollmentID = $row["enrollmentid"];
                     $CourseID = $row["courseid"];
                     $CourseLevel = $row['courselevel'];
-                    $StudentID = $row['userid'];
+
                     $StudentName = $row['username'];
-                    $Status = $row['paystatus']; 
-                    if($row['status'] == 0)
+                    if($row['paystatus'] == 0)
                         $Status = "Not Yet";
                     else
-                        $Status = "Paid";      
+                        $Status = "Paid";
             ?>
             <tr>
                 <td><?php echo $EnrollmentID ?></td>
@@ -148,8 +151,8 @@ try{
                 <td><?php echo $StudentName ?></td>
                 <td><?php echo $Status ?></td>
                 <td>
-                    <a href="updatecourse.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="deletecourse.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="updateenrollment.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="deleteenrollment.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
             <?php 
@@ -209,8 +212,9 @@ try{
             <?php
                 $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
                 mysqli_select_db($con,'sql6423581');
+
                 if($con->connect_error){
-                die("Connection failed". $con->connect_error);  
+                    die("Connection failed". $con->connect_error);  
                 }
 
                 $sql = " SELECT * from courseinfo WHERE status = '1'";
@@ -228,7 +232,7 @@ try{
                 <td><?php echo $Batch ?></td>
             </tr>
             <?php 
-               }                          
+                }                          
             ?> 
             </table>
         </div>
