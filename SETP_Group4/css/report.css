@@ -1,0 +1,102 @@
+body {
+    background-size: cover;
+    background-position: center;
+}
+
+
+.companylogo img {
+    float: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    width: 430px;
+    height: 125px;
+}
+
+.companylogo h1 {
+    padding: 22px 20px;
+    height: 80px;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+ul {
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: #fff;
+    text-decoration: none;
+}
+
+    ul li a {
+        line-height: 80px;
+        color: rgb(0, 0, 0);
+        padding: 12px 30px;
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+        ul li a:hover {
+            background: rgba(0,0,0,0.5);
+            border-radius: 6px;
+            color: #fff;
+        }
+
+.logout {
+    float: right;
+    padding: 10px 10px;
+    font-size: 10px;
+    color: #000000;
+}
+
+    .logout:hover {
+        color: #ff00ac;
+    }
+
+
+.section1 {
+    width: 35%;
+    float: left;
+    padding-top: 120px;
+    animation: blink 1s linear
+}
+
+.section2 {
+    width: 35%;
+    float: right;
+    padding-top: 120px;
+    animation: blink 1s linear
+}
+
+.chart {
+    width: 700px;
+    height: 300px;
+}
+
+.barchart {
+    padding-top: 30px;
+    width: 700px;
+    height: 330px;
+}
+
+.linechart {
+    width: 700px;
+    height: 300px;
+}
+
+.divchart {
+    padding-top: 30px;
+    width: 700px;
+    height: 330px;
+}
+
+@keyframes blink {
+    0% {opacity: 0;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
