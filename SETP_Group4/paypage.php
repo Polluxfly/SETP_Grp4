@@ -56,7 +56,7 @@ body {
 						<!-- Used to display form errors -->
 						<div id="card-errors" role="alert"></div>
 						</div>
-						<button style="display: flex;">Submit Payment</button>
+						<button style="display: flex; btn btn-primary btn-sm">Submit Payment</button>
 					</form>
 				</div>
 			</div>
