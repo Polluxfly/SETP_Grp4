@@ -293,10 +293,12 @@ span{
 
         font-size:15px;
         font-family:sans-serif;
+		height: 35px;
+		width: 10%;
     }
 
     .table-scroll td, .table-scroll th {
-        flex-basis: 100%;
+        flex-basis: auto;
         flex-grow: 2;
         display: block;
         text-align: left;
@@ -305,7 +307,7 @@ span{
 .table-scroll.small-first-col td:first-child,
 .table-scroll.small-first-col th:first-child {
         flex-basis: 20%;
-        flex-grow: 1;
+        flex-grow: 2;
     }
 
 .body-half-screen {
@@ -313,7 +315,7 @@ span{
 }
 
 .small-col {
-    flex-basis: 10%;
+    flex-basis: auto;
 }
 
 tr:nth-child(odd){
@@ -324,64 +326,6 @@ tr:nth-child(odd){
     background-color: #636161;
     color: #fff;
 }
-
-
-
-
-
-
-.table-scroll2 {
-    display: block;
-    empty-cells: show;
-    border-spacing: 0;
-    background-color: #fff;
-}
-
-    .table-scroll2 thead {
-        background-color: #fff;
-        position: relative;
-        display: block;
-        overflow-y: scroll;
-    }
-
-    .table-scroll2 tbody {
-        display: block;
-        position: relative;
-        overflow-y: scroll;
-        border-top: 1px solid rgba(0,0,0,0.2);
-    }
-
-    .table-scroll2 tr {
-        display: flex;
-    }
-
-    .table-scroll2 th {
-        font-weight: 700;
-        font-size: 16px;
-        background-color: #38ebc5;
-        color: #fff;
-        font-family: sans-serif;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .table-scroll2 td {
-        font-size: 15px;
-        font-family: sans-serif;
-    }
-
-    .table-scroll2 td, .table-scroll2 th {
-        flex-basis: 100%;
-        flex-grow: 2;
-        display: block;
-        text-align: left;
-    }
-
-    .table-scroll2.small-first-col td:first-child,
-    .table-scroll2.small-first-col th:first-child {
-        flex-basis: 20%;
-        flex-grow: 1;
-    }
 
 .body-half-screen {
     max-height: 300px;
