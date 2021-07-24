@@ -91,7 +91,12 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
+$check = "SELECT * FROM `userinfo` WHERE  userid <> '$info[0]' and email='$info[4]' ";
 $update_query ="UPDATE `userinfo` SET role='$info[1]', status='$info[2]',username='$info[3]',email='$info[4]',password='$info[5]',gender='$info[6]',nationality='$info[7]',mobile='$info[8]',dob='$info[9]' WHERE userid = '$info[0]'";
+$check_result = mysqli_query($con,$check);
+if(mysqli_num_rows($check_result)>0)
+{ echo("The Email is taken. Try another.");}
+else{
 try{
     $update_result=mysqli_query($con,$update_query);
     if($update_result){
@@ -106,7 +111,7 @@ try{
     echo("Error In Update".$ex->getMessage());
 }
 }
-
+}
 //search
 if(isset($_POST['search']))
 {   
