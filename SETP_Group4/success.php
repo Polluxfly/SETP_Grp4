@@ -1,3 +1,20 @@
+<?php
+session_start();
+if(!isset($_SESSION['userid'])){
+    header('location:index.php');
+    }
+
+$loginuser = $_SESSION['userid'];
+$enrolledid = $_GET['id'];
+$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+mysqli_select_db($con,'sql6423581');
+
+$update_query = " UPDATE `enrollmentinfo` SET `paystatus`=1 WHERE enrollmentid = $enrolledid; ";
+   
+$result = mysqli_query($con, $update_query);
+
+?>
+
 <html>
 <style>
 body {
@@ -23,7 +40,7 @@ body {
         <hr>
         <p>Your purchase is successful</p>
         <p>Check your email for the invoice</p>
-	<p><a href="studenthome.php" class="clickme">Back to homepage</p>
+	<p><a href="studenthome.php" class="clickme">Back to Home Page</p>
         </span>  
    	</div>
 </body>
