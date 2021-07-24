@@ -53,16 +53,16 @@
             <li><a href="#">My Progress</a></li>
          </ul>
       </div>
-      <div class="container" style="position: absolute; top: 45%; left: 15%">
+      <div class="container" style="position: absolute; top: 45%; left: 12%;">
          <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-4">
                <div class="">
                   <span>
                      <h1>Enroll in a course now ! <?php echo $user_name; ?></h1>
                   </span>
                </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-6" >
                <div class="">
                   <?php
                      $SQL = 	" SELECT *
@@ -82,7 +82,6 @@
                      	echo '  <th>Course ID </th>';
                      	echo '  <th>Course Level </th>';
                      	echo '  <th>Course Fee </th>';
-                     	echo '  <th>Pay Status </th>';
                      echo '</thead>';
                      	echo '</tr>';
                      
@@ -91,21 +90,45 @@
                      			echo '<td>' . $Row['enrollmentid'] . '</td>';
                      			echo '<td>' . $Row['courseid'] . '</td>';
                      			echo '<td>' . $Row['courselevel'] . '</td>';
-                     			echo '<td>' . $Row['coursefee'] . '</td>';
-                     			if ($Row['paystatus'] == '0')
-                     	         { 
-                                 $id = $Row['enrollmentid'];
-                                 echo "<td><button class=\"btn btn-primary btn-sm\" style=\"right: 50px\"  onclick=\"onclickRedirect()\">Pay</button></td>";
-                     			   } 
-                     			   else
-                     			   { 
-                     		       echo"<td><a href=\"#\" class=\"btn btn-success btn-sm\" style=\"right: 50px\" >Paid</a></td>";
-                     			   }
-                     			echo '</tr>';
-                     	}
-                     	echo '</table>';
-                     
-                     ?>                    
+                     			echo '<td>' . '$' .$Row['coursefee'] . '</td>';
+                              echo '</tr>';
+                           }
+                        echo '</table>'
+                     ?>
+               </div>
+            </div>
+            <div class="col-sm-2">
+               <div class="">
+                  <table class="table-scroll small-first-col">
+                  <thead>
+                     <tr>
+                        <th>Payment Status</th>
+                     </tr>
+                  </thead>
+                  <?php
+                     $SQL = 	" SELECT *
+                                    		  FROM enrollmentinfo AS e
+                                    		  INNER JOIN courseinfo AS c 
+                                    		  ON e.courseid = c.courseid
+                                    		  INNER JOIN userinfo AS u
+                                    		  ON e.userid = u.userid
+                                    		  WHERE c.status = '1' AND u.status = 'Active' AND u.userid = '$loginuser'";
+                                    
+                                    $result = mysqli_query($con, $SQL) or die('A error occured: ');
+                                    $number_of_rows = mysqli_num_rows($result);
+                                             while ($Row = mysqli_fetch_assoc($result)) {
+                                             if ($Row['paystatus'] == '0')
+                                    	         { 
+                                                $id = $Row['enrollmentid'];
+                                                echo "<tr><td><button class=\"btn btn-primary btn-sm\" style=\"right: 50px\"  onclick=\"onclickRedirect()\">Pay</button></td></tr>";
+                                    			   } 
+                                    			   else
+                                    			   { 
+                                    		       echo"<tr><td><a href=\"#\" class=\"btn btn-success btn-sm\" style=\"right: 50px\" >Paid</a></td></tr>";
+                                    			   }
+                                          }
+                                       echo '</table>'
+                                    ?>                    
                </div>
             </div>
          </div>
