@@ -12,7 +12,7 @@
 
 // Create customer
 $customer = \Stripe\Customer::create(array(
-    "email" => $email,
+    "email" => $email,	
     "source" => $token
 ));
 
@@ -20,7 +20,7 @@ $customer = \Stripe\Customer::create(array(
 $charge = \Stripe\Charge::create(array(
     "amount" => 5000,
     "currency" => "sgd",
-    "description" => "Japanese N1",
+    "description" => "Course",
     "customer" => $customer->id
 ));
 
