@@ -126,6 +126,8 @@ body {
 		currentURL = window.location.href;
 		var phpVars = currentURL.slice(44); //Change number according to currentURL, to check use alert currentURL.
 	</script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xxjapp/xdialog@3/xdialog.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/xxjapp/xdialog@3/xdialog.min.js"></script>
 	<script type="text/javascript" src="scr.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
