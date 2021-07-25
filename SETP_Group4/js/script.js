@@ -55,7 +55,9 @@ $(function() {
         } else if (!isCvvValid) {
             alert("Wrong CVV");
         } else {
-
+			let url1 = 'success.php?id=';
+			let url2 = phpVars;
+			window.location = url1.concat(url2);
         }
     });
 });
