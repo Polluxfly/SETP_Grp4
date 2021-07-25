@@ -116,16 +116,21 @@ body {
                         <img src="amex.jpg" id="amex">
                     </div>
                     <div class="form-group" id="pay-now">
-                        <button onclick="window.location.href='success.php?id=<?php echo $enrolledid; ?>'" type="submit" class="btn btn-primary" id="confirm-purchase">Confirm</button>
+                        <button type="submit" class="btn btn-primary" id="confirm-purchase">Confirm</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+	<script type="text/javascript">
+		currentURL = window.location.href;
+		var phpVars = currentURL.slice(44); //Change number according to currentURL, to check use alert currentURL.
+	</script>
+	<script type="text/javascript" src="scr.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/jquery.payform.min.js" charset="utf-8"></script>
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
 
