@@ -4,6 +4,13 @@ body {
   background-image: url("normalpage_back.jpg");
 }
 </style>
+
+<!-- 
+1. Add Appeal button for the Student Enrollment page, click add to set status
+Show edit when status == 1; 
+2. Course ID for Search
+-->
+
 <head>
 
     <title>OH, Hi YO !</title>
@@ -41,7 +48,7 @@ body {
                 <input type="int" name="userid" class="form-control" required>
             </div><br>
 
-            <button type="submit" class="btn2" name="Add">Add</button><br><br><br><br>
+            <button type="submit" class="btn2" name="Add">Add</button><br><br>
 
  <?php
 $CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : '');
@@ -56,40 +63,75 @@ if($con->connect_error){
 }
 
 if(isset($_POST['Add'])){
-    $query ="INSERT INTO `enrollmentinfo` (`courseid`, `userid`, `paystatus`)
-     VALUES ('$CourseID', '$UserID', b'0')";
-try{
-    $result=mysqli_query($con,$query);
-    if($result){
-        if(mysqli_affected_rows($con)>0)
-        {
-            echo("New Enrollment Added!");
-        }else{
-            echo("Failed to add Enrollment!");
+    $isValueValid = true;
+
+    $studentIDValidationQuery="SELECT userid FROM userinfo WHERE userid = $UserID ";
+    $studentIDResult=mysqli_query($con,$studentIDValidationQuery);
+    if(mysqli_num_rows($studentIDResult) > 0)
+        $isValueValid = true;
+    else
+    {
+        $isValueValid = false;
+        echo("<br>Student ID is invalid!");
+    }
+
+    $courseIDValidationQuery="SELECT courseid FROM courseinfo WHERE courseid = $CourseID ";
+    $courseIDResult=mysqli_query($con,$courseIDValidationQuery);
+    if(mysqli_num_rows($courseIDResult) > 0)
+        $isValueValid = true;
+    else
+    {
+        $isValueValid = false;
+        echo("<br>Course ID is invalid!");
+    }
+
+    if(!$isValueValid)
+    {
+        echo("<br>Failed to add Enrollment.");
+    }
+
+    if($isValueValid)
+    {
+        $query ="INSERT INTO `enrollmentinfo` (`courseid`, `userid`, `paystatus`)
+        VALUES ('$CourseID', '$UserID', b'0')";
+        try{
+            $result=mysqli_query($con,$query);
+            if($result){
+                if(mysqli_affected_rows($con)>0)
+                {
+                    echo("New Enrollment Added!");
+                }else{
+                    echo("Failed to add Enrollment!");
+                }
+            }
+        }catch(Exception $ex){
+            echo("Error In Update".$ex->getMessage());
         }
     }
-}catch(Exception $ex){
-    echo("Error In Update".$ex->getMessage());
-}
+
 }
 ?>
         </form>
         <form method="post" action="adminenrollment.php">
             <div class="messagebox"><h4> Search Enrollment </h4></div>
             <div class="form-group">
+                <label>Course ID</label>
+                <input type="int" name="courseid" class="form-control">
+            </div><br>
+            <div class="form-group">
                 <label>Student ID</label>
-                <input type="int" name="studentid" class="form-control" required>
+                <input type="int" name="studentid" class="form-control">
             </div><br>
             <button type="submit" class="btn2" name="Search">Search</button>
         </form>
 
 
 <?php
-$StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : '');
+$StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : " ");
+$CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : " ");
+
 if(isset($_POST['Search'])){
-    $StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : '');
-    echo($StudentID);
-    header("location:searchenrollment.php?Sea=$StudentID");
+    header("location:searchenrollment.php?para=$StudentID,$CourseID");
 }
 
 echo($StudentID);
@@ -136,7 +178,7 @@ echo($StudentID);
                     $EnrollmentID = $row["enrollmentid"];
                     $CourseID = $row["courseid"];
                     $CourseLevel = $row['courselevel'];
-
+                    $AppealStatus = $row['appealstatus'];
                     $StudentName = $row['username'];
                     if($row['paystatus'] == 0)
                         $Status = "Not Yet";
@@ -151,7 +193,15 @@ echo($StudentID);
                 <td><?php echo $StudentName ?></td>
                 <td><?php echo $Status ?></td>
                 <td>
-                    <a href="updateenrollment.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
+                    <?php  
+                        if($AppealStatus == 1) 
+                        {
+                            ?>
+                            <a href="updateenrollment.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <?php
+                        }
+
+                    ?>
                     <a href="deleteenrollment.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>

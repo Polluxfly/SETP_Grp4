@@ -103,24 +103,54 @@ if(isset($_GET['edit']))
 if(isset($_POST['update'])){
     $info = getData();   
 
-    $query ="UPDATE `enrollmentinfo` SET courseid='$info[1]', userid='$info[2]',
-        paystatus='$info[3]' WHERE enrollmentid = '".$EnrollmentID."'";
-
-    try{
-        $result=mysqli_query($con,$query);
-        if($result){
-            if(mysqli_affected_rows($con)>0)
-            {
-                echo("Enrollment Updated !");
-                header("location:adminenrollment.php");
-            }else{
-                echo("Update Failed !");
-                header("location:adminenrollment.php");
-            }
-        }
-    }catch(Exception $ex){
-        echo("Error In Update".$ex->getMessage());
+    $studentIDValidationQuery="SELECT userid FROM userinfo WHERE userid = '$info[2]' ";
+    $studentIDResult=mysqli_query($con,$studentIDValidationQuery);
+    if(mysqli_num_rows($studentIDResult) > 0)
+        $isValueValid = true;
+    else
+    {
+        $isValueValid = false;
+        echo("<br>Student ID is invalid!");
     }
+
+    $courseIDValidationQuery="SELECT courseid FROM courseinfo WHERE courseid = '$info[1]' ";
+    $courseIDResult=mysqli_query($con,$courseIDValidationQuery);
+    if(mysqli_num_rows($courseIDResult) > 0)
+        $isValueValid = true;
+    else
+    {
+        $isValueValid = false;
+        echo("<br>Course ID is invalid!");
+    }
+
+    if(!$isValueValid)
+    {
+        echo("<br>Failed to add Enrollment.");
+    }
+
+    if($isValueValid)
+    {
+        $query ="UPDATE `enrollmentinfo` SET courseid='$info[1]', userid='$info[2]',
+        paystatus='$info[3]', appealstatus=0 WHERE enrollmentid = '".$EnrollmentID."'";
+
+        try{
+            $result=mysqli_query($con,$query);
+            if($result){
+                if(mysqli_affected_rows($con)>0)
+                {
+                    echo("Enrollment Updated !");
+                    header("location:adminenrollment.php");
+                }else{
+                    echo("Update Failed !");
+                    header("location:adminenrollment.php");
+                }
+            }
+        }catch(Exception $ex){
+            echo("Error In Update".$ex->getMessage());
+        }
+
+    }
+
 
 }
 
