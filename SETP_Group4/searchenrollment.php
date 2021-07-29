@@ -21,7 +21,7 @@ body {
         
     <div class="container">
     <section class="section2">
-        <h4> Search Result For Student ID: <?php echo($SearchedStudentID = $_GET['Sea']);?> </h4>
+        <h4> Searched Result </h4>
         <div class = "container2">
             <table class="table-scroll2 small-first-col">
 
@@ -38,39 +38,54 @@ body {
             <tbody class="body-half-screen">
 
             <?php
-                if(isset($_GET['Sea']))
-                    $SearchedStudentID = $_GET['Sea'];
-
-                $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-                mysqli_select_db($con,'sql6423581');
-                if($con->connect_error){
-                die("Connection failed". $con->connect_error);  
-                }
-
-                $sql = " SELECT *
-                    FROM enrollmentinfo AS e
-                    LEFT JOIN courseinfo AS c 
-                    ON e.courseid = c.courseid
-                    LEFT JOIN userinfo AS u
-                    ON e.userid = u.userid
-                    WHERE c.status = '1' AND u.role = 'Student' 
-                    AND u.status = 'Active' AND e.userid = $SearchedStudentID";
-
-                $result = $con-> query($sql);
-
-                                         
-                while($row=mysqli_fetch_assoc($result))
-                {
-                    $StudentID = $row['userid'];
-                    $EnrollmentID = $row["enrollmentid"];
-                    $CourseID = $row["courseid"];
-                    $CourseLevel = $row['courselevel'];
-
-                    $StudentName = $row['username'];
-                    if($row['paystatus'] == 0)
-                        $Status = "Not Yet";
+                $isValidValue = true; 
+                if(isset($_GET['para']))
+                    $parameters = explode(",",  $_GET['para']);
+       
+                    if($parameters[0]!='' && $parameters[1]!='')
+                        $wheresql = "e.userid = '$parameters[0]' AND e.courseid = '$parameters[1]'";
+                    else if($parameters[0]!='' && $parameters[1]=='')
+                        $wheresql = "e.userid = '$parameters[0]'";
+                    else if($parameters[0]=='' && $parameters[1]!='')
+                        $wheresql = "e.courseid = '$parameters[1]'";
                     else
-                        $Status = "Paid";   
+                    {
+                        $isValidValue = false;
+                        echo("Invalid Student & Course ID, please return to last page and input correct IDs!");
+                    }
+
+                if($isValidValue)
+                {
+                    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+                    mysqli_select_db($con,'sql6423581');
+                    if($con->connect_error){
+                    die("Connection failed". $con->connect_error);  
+                    }
+    
+                    $sql = " SELECT *
+                        FROM enrollmentinfo AS e
+                        LEFT JOIN courseinfo AS c 
+                        ON e.courseid = c.courseid
+                        LEFT JOIN userinfo AS u
+                        ON e.userid = u.userid
+                        WHERE c.status = '1' AND u.role = 'Student' 
+                        AND u.status = 'Active' AND $wheresql";
+        
+                    $result = $con-> query($sql);
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        $StudentID = $row['userid'];
+                        $EnrollmentID = $row["enrollmentid"];
+                        $CourseID = $row["courseid"];
+                        $CourseLevel = $row['courselevel'];
+    
+                        $StudentName = $row['username'];
+                        if($row['paystatus'] == 0)
+                            $Status = "Not Yet";
+                        else
+                            $Status = "Paid";   
+                
+
             ?>
             <tr>
                 <td><?php echo $EnrollmentID ?></td>
@@ -85,7 +100,8 @@ body {
                 </td>
             </tr>
             <?php 
-               }                          
+                    }
+                }                          
             ?> 
             </table>
         </div><br><br>

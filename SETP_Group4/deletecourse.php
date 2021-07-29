@@ -17,15 +17,22 @@ if($con->connect_error){
             {
                 if(mysqli_affected_rows($con)>0)
                 {
-                    echo("Student Deleted!");
-                    header("location:coursedetails.php");
+                    echo("Course Deleted!");
                 }else{
                     echo("Data Not Deleted");
-                    header("location:coursedetails.php ");
                 }
             }
         }catch(Exception $ex){
             echo ("Error in Delete".$ex ->getMessage());
         }
+
+        // Delete Enrollment Table as well
+        $query = "DELETE FROM `enrollmentinfo` WHERE `enrollmentinfo`.`courseid` = '".$CourseID."'";
+        try{
+            $result = mysqli_query($con, $query);
+        }catch(Exception $ex){
+            echo ("Error in Delete".$ex ->getMessage());
+        }
+
     }
 ?>

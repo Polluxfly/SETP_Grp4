@@ -89,6 +89,7 @@ die("Connection failed". $con->connect_error);
 }
 
 if(isset($_POST['Add'])){
+    $isValueValid = true;
     if($Batch == 0)
     {
         echo("<br>Batch Value is invalid, failed to add Course!");
