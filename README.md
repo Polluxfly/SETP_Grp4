@@ -35,3 +35,4 @@ UOP SETP Group 4 Project
   ![image](https://user-images.githubusercontent.com/57469755/124485749-75e01f80-dddf-11eb-8d2f-d2e1ca2882bb.png)
 
  
+Please unzip the vendor.zip into the SETP_GROUP folder. enter vendor folder, cut the vendor folder and replace it again at SETP_GROUP folder again. 
