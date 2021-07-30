@@ -14,14 +14,13 @@
 
    $nameresult = mysqli_query($con, $namequery);
       
-   if($nameresult->num_rows>0)
-   {
-   while($row=$nameresult->fetch_assoc())
-   {
-   $user_name = $row['username'];
-		
-   }
-   }
+	if($nameresult->num_rows>0)
+	{
+		while($row=$nameresult->fetch_assoc())
+		{
+		$user_name = $row['username'];
+		}
+	}
    
    ?>
 <html>
@@ -102,7 +101,7 @@
 								if ($Row['paystatus'] == '0')
 								    { 
 								    $id = $Row['enrollmentid'];
-								    echo "<td><button class=\"btn btn-primary btn-sm\" style=\"right: 50px\"  onclick=\"onclickRedirect()\">Pay</button></td>";
+								    echo "<td><a href=\"paypage.php?id=$id\"><button class=\"btn btn-primary btn-sm\" style=\"right: 50px\">Pay</button></a></td>";
 								    } 
 								    else
 								    { 
@@ -110,7 +109,7 @@
 								   }
 							    if ($Row['appealstatus'] == 0)
 								    {
-								    echo "<td><button class=\"btn btn-danger btn-sm\" style=\"right: 50px\"  onclick=\"onclickRedirect_appeal()\">Appeal</button></td>";
+								    echo "<td><a href=\"appeal.php?id=$id\"><button class=\"btn btn-danger btn-sm\" style=\"right: 50px\">Appeal</button></a></td>";
 								    } else {
 								    echo "<td> Appealed </td>";	
 								    }
@@ -127,19 +126,6 @@
             </div>
          </div>
       </div>
-      <script>
-         function onclickRedirect(){
-			window.location.href = "paypage.php?id=<?php echo $id ?>";
-          }
-		  
-		 function onclickRedirect_appeal() {
-			window.location.href = "appeal.php?id=<?php echo $id ?>";	
-		  }
-          
-      </script>
-      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-      <script src="assets/js/bs-init.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
    </body>
 </html>
 
