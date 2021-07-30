@@ -1,5 +1,28 @@
 <?php
-
+                $isValidValue = true; 
+                if(isset($_GET['para']))
+                    $parameters = explode(",",  $_GET['para']);
+       
+                if($parameters[0]!='' && $parameters[1]!='')
+                {
+                    $wheresql = "e.userid = '$parameters[0]' AND e.courseid = '$parameters[1]'";
+                    $titleinfo = "for Student ID: $parameters[0], Course ID: $parameters[1]";
+                }
+                else if($parameters[0]!='' && $parameters[1]=='')
+                {
+                    $wheresql = "e.userid = '$parameters[0]'";
+                    $titleinfo = "for Student ID: $parameters[0]";
+                }
+                else if($parameters[0]=='' && $parameters[1]!='')
+                {
+                    $wheresql = "e.courseid = '$parameters[1]'";
+                    $titleinfo = "for Course ID: $parameters[1]";
+                }
+                else
+                {
+                    $isValidValue = false;
+                    $titleinfo = "Not Found!";
+                }
 ?>
 
 <html>
@@ -21,7 +44,7 @@ body {
         
     <div class="container">
     <section class="section2">
-        <h4> Searched Result </h4>
+        <h4> Searched Result <?php echo $titleinfo ?></h4>
         <div class = "container2">
             <table class="table-scroll2 small-first-col">
 
@@ -38,21 +61,6 @@ body {
             <tbody class="body-half-screen">
 
             <?php
-                $isValidValue = true; 
-                if(isset($_GET['para']))
-                    $parameters = explode(",",  $_GET['para']);
-       
-                    if($parameters[0]!='' && $parameters[1]!='')
-                        $wheresql = "e.userid = '$parameters[0]' AND e.courseid = '$parameters[1]'";
-                    else if($parameters[0]!='' && $parameters[1]=='')
-                        $wheresql = "e.userid = '$parameters[0]'";
-                    else if($parameters[0]=='' && $parameters[1]!='')
-                        $wheresql = "e.courseid = '$parameters[1]'";
-                    else
-                    {
-                        $isValidValue = false;
-                        echo("Invalid Student & Course ID, please return to last page and input correct IDs!");
-                    }
 
                 if($isValidValue)
                 {

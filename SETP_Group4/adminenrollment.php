@@ -127,14 +127,13 @@ if(isset($_POST['Add'])){
 
 
 <?php
-$StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : " ");
-$CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : " ");
+$StudentID = (isset($_POST['studentid']) ? $_POST['studentid'] : '');
+$CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : '');
 
 if(isset($_POST['Search'])){
     header("location:searchenrollment.php?para=$StudentID,$CourseID");
 }
 
-echo($StudentID);
 ?>
     </section>
      
