@@ -76,6 +76,7 @@
                      	echo '  <th>Course Fee </th>';
 						echo '	<th>Payment Status</th>';
 						echo '<th>Action</th>';
+					    echo '  <th>Appeal </th>';
                      echo '</thead>';
                      	echo '</tr>';
                      
@@ -84,7 +85,10 @@
                      			echo '<td>' . $Row['enrollmentid'] . '</td>';
                      			echo '<td>' . $Row['courseid'] . '</td>';
                      			echo '<td>' . $Row['courselevel'] . '</td>';
-                     			echo '<td>' . '$' .$Row['coursefee'] . '</td>';
+								echo '<td>' . '$' .$Row['coursefee'] . '</td>';
+								// button for appeal.
+								
+								// condition to show paid or not paid
 								if($Row['paystatus'] == 0)
 									{
 									echo "<td> Not Yet</td>";
@@ -93,6 +97,8 @@
 									{
 									echo "<td> Paid</td>";
 									}
+								// if paid show button else show an empty block.
+								// button will redirect to the paypage with id based on enrollmentid
 								if ($Row['paystatus'] == '0')
 								    { 
 								    $id = $Row['enrollmentid'];
@@ -102,6 +108,12 @@
 								    { 
 								    echo"<td>  </td>";
 								   }
+							    if ($Row['appealstatus'] == 0)
+								    {
+								    echo "<td><button class=\"btn btn-danger btn-sm\" style=\"right: 50px\"  onclick=\"onclickRedirect_appeal()\">Appeal</button></td>";
+								    } else {
+								    echo "<td> Appealed </td>";	
+								    }
                                 echo '</tr>';
                            }
                         echo '</table>'
@@ -117,8 +129,12 @@
       </div>
       <script>
          function onclickRedirect(){
-         window.location.href = "paypage.php?id=<?php echo $id ?>";
+			window.location.href = "paypage.php?id=<?php echo $id ?>";
           }
+		  
+		 function onclickRedirect_appeal() {
+			window.location.href = "appeal.php?id=<?php echo $id ?>";	
+		  }
           
       </script>
       <script src="assets/bootstrap/js/bootstrap.min.js"></script>
