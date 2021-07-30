@@ -9,30 +9,23 @@ if($con->connect_error){
 
     if(isset($_GET['Del']))
     {
-        $CourseID = $_GET['Del'];
-        $query = "DELETE FROM `courseinfo` WHERE `courseinfo`.`courseid` = '".$CourseID."'";
+        $EnrollmentID = $_GET['Del'];
+        $query = "DELETE FROM `enrollmentinfo` WHERE `enrollmentinfo`.`enrollmentid` = '".$EnrollmentID."'";
         try{
             $result = mysqli_query($con, $query);
             if($result)
             {
                 if(mysqli_affected_rows($con)>0)
                 {
-                    echo("Course Deleted!");
+                    echo("Enrollment Deleted!");
+                    header("location:adminenrollment.php");
                 }else{
                     echo("Data Not Deleted");
+                    header("location:adminenrollment.php ");
                 }
             }
         }catch(Exception $ex){
             echo ("Error in Delete".$ex ->getMessage());
         }
-
-        // Delete Enrollment Table as well
-        $query = "DELETE FROM `enrollmentinfo` WHERE `enrollmentinfo`.`courseid` = '".$CourseID."'";
-        try{
-            $result = mysqli_query($con, $query);
-        }catch(Exception $ex){
-            echo ("Error in Delete".$ex ->getMessage());
-        }
-
     }
 ?>

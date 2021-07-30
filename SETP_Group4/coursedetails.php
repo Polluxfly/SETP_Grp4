@@ -1,15 +1,3 @@
-<?php
-//connect to mysql database
-try{
-    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-}catch(mysqli_Sql_Exception $ex)
-{
-    echo("error in connecting");
-}
-
-mysqli_select_db($con,'sql6423581');
-?>
-
 <html>
 <style>
 body {
@@ -33,16 +21,14 @@ body {
             <li><a href="createuser.php">Registration</a></li>
             <li><a href="profile.php">Student Profile</a></li>
             <li><a href="coursedetails.php">Course Details</a></li>
-            <li><a href="enrollment.php">Enrollment</a></li>
+            <li><a href="adminenrollment.php">Enrollment</a></li>
             <li><a href="#">Student Progress</a></li>
             <li><a href="enquiry.php">Enquiries</a></li>
         </ul>
     </div>
         
     <div class="container">
-    <div class="search-box">
-    <div class="row">
-    <div class="col-md-6 enquiry-left">
+    <section class="section1">
     <div class="messagebox"><h4> Add New Course </h4></div>
     <form method="post" action="coursedetails.php">
         <div class="form-group">
@@ -57,8 +43,20 @@ body {
         </div><br>
 
         <div class="form-group">
+            <label>Course Status: </label><br>
+            <select id="status" name="status">
+                <option value='1'>Active</option>
+                <option value='0'>Deactive</option>
+            </select>
+        </div><br>
+
+        <div class="form-group">
+            <label>Course Fee</label>
+            <input type="int" name="coursefee" class="form-control" required>
+        </div><br>
+        <div class="form-group">
             <label>Duration (Month)</label>
-            <input type="text" name="duration" class="form-control" required>
+            <input type="int" name="duration" class="form-control" required>
         </div><br>
         <div class="form-group">
             <label>Teacher</label>
@@ -66,43 +64,90 @@ body {
         </div><br>
         <div class="form-group">
             <label>Batch</label>
-            <input type="text" name="batch" class="form-control" required>
+            <input type="int" name="batch" class="form-control" required>
         </div><br>
 
         <button type="submit" class="btn2" name="Add">Add</button>
-
+ 
 <?php
 
- $CourseLevel = (isset($_POST['courselevel']) ? $_POST['courselevel'] : '');
- $Batch = (isset($_POST['batch']) ? $_POST['batch'] : '');
- $Duration = (isset($_POST['duration']) ? $_POST['duration'] : '');
- $Teacher = (isset($_POST['teacher']) ? $_POST['teacher'] : '');
+$Status = (isset($_POST['status']) ? $_POST['status'] : '');
+$CourseLevel = (isset($_POST['courselevel']) ? $_POST['courselevel'] : '');
+$Batch = (isset($_POST['batch']) ? $_POST['batch'] : '');
+$Duration = (isset($_POST['duration']) ? $_POST['duration'] : '');
+$Teacher = (isset($_POST['teacher']) ? $_POST['teacher'] : '');
+$CourseFee = (isset($_POST['coursefee']) ? $_POST['coursefee'] : '');
+
+
+    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+
+    mysqli_select_db($con,'sql6423581');
+    
+    
+if($con->connect_error){
+die("Connection failed". $con->connect_error);  
+}
 
 if(isset($_POST['Add'])){
-    $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher)
-        VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher')";
-try{
-	mysqli_query ($con, $query);
-	echo "Added Course Successfully!";
-    $query = "";
-}catch(Exception $ex){
-    echo("Error In Update".$ex->getMessage());
-}
+    $isValueValid = true;
+    if($Batch == 0)
+    {
+        echo("<br>Batch Value is invalid, failed to add Course!");
+        $isValueValid = false;
+    }
+    if($CourseFee == 0)
+    {
+        echo("<br>CourseFee Value is invalid, failed to add Course!");
+        $isValueValid = false;
+    }
+    if($Duration == 0)
+    {
+        echo("<br>Duration Value is invalid, failed to add Course!");
+        $isValueValid = false;
+    }
+
+    if($isValueValid)
+    {
+        $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher, status, coursefee)
+            VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher', $Status,  '$CourseFee')";
+        try{
+            $result=$con -> query($query);
+            if($result){
+                if(mysqli_affected_rows($con)>0)
+                {
+                echo("New Course Added!");
+                }else{
+                echo("Failed to add Course!");
+                }
+            }
+        }catch(Exception $ex){
+            echo("Error In Update".$ex->getMessage());
+        }
+    }
 }
 
+
 ?>
-    </form>
-      
-    <div class="wrap">
-        <table>
+   </form>
+    </section>
+     
+    <section class="section2">
+        <h4> Course Ongoing </h4>
+        <div class = "container2">
+            <table class="table-scroll2 small-first-col">
+
             <tr>
-                <th>Course ID</th>
-                <th>Course Level</th>
+                <th>ID</th>
+                <th>Level</th>
+                <th>Fee</th>
+                <th>Status</th>
                 <th>Batch</th>
                 <th>Duration</th>
                 <th>Teacher</th>
                 <th>Actions</th>
             </tr>
+        
+            <tbody class="body-half-screen">
 
             <?php
                 $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
@@ -111,22 +156,28 @@ try{
                 die("Connection failed". $con->connect_error);  
                 }
 
-                $sql = " SELECT * from courseinfo";
+                $sql = " SELECT * from courseinfo WHERE status = '1'";
                 $result = $con-> query($sql);
 
                                              
                 while($row=mysqli_fetch_assoc($result))
                 {
-                    $CourseID= $row['courseid'];
+                    $CourseID = $row["courseid"];
+                    $CourseFee = $row['coursefee'];
                     $CourseLevel = $row['courselevel'];
                     $Batch = $row['batch'];
                     $Duration = $row['duration'];
-                    $Teacher = $row['teacher'];
-                    
+                    $Teacher = $row['teacher']; 
+                    if($row['status'] == 0)
+                        $Status = "Deactive";
+                    else
+                        $Status = "Active";      
             ?>
             <tr>
                 <td><?php echo $CourseID ?></td>
                 <td><?php echo $CourseLevel ?></td>
+                <td><?php echo $CourseFee ?></td>
+                <td><?php echo $Status ?></td>
                 <td><?php echo $Batch ?></td>
                 <td><?php echo $Duration ?></td>
                 <td><?php echo $Teacher ?></td>
@@ -138,8 +189,69 @@ try{
             <?php 
                }                          
             ?> 
-        </table>
-    </div>
+            </table>
+        </div><br><br>
+
+        <h4> Course Finished</h4>
+        <div class = "container2">
+            <table class="table-scroll small-first-col">
+
+            <tr>
+                <th>ID</th>
+                <th>Level</th>
+                <th>Fee</th>
+                <th>Status</th>
+                <th>Batch</th>
+                <th>Duration</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+        
+            <tbody class="body-half-screen">
+
+            <?php
+                $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+                mysqli_select_db($con,'sql6423581');
+                if($con->connect_error){
+                die("Connection failed". $con->connect_error);  
+                }
+
+                $sql = " SELECT * from courseinfo WHERE status = '0'";
+                $result = $con-> query($sql);
+
+                                             
+                while($row=mysqli_fetch_assoc($result))
+                {
+                    $CourseID = $row["courseid"];
+                    $CourseFee = $row['coursefee'];
+                    $CourseLevel = $row['courselevel'];
+                    $Batch = $row['batch'];
+                    $Duration = $row['duration'];
+                    $Teacher = $row['teacher']; 
+                    if($row['status'] == 0)
+                        $Status = "Deactive";
+                    else
+                        $Status = "Active";      
+            ?>
+            <tr>
+                <td><?php echo $CourseID ?></td>
+                <td><?php echo $CourseLevel ?></td>
+                <td><?php echo $CourseFee ?></td>
+                <td><?php echo $Status ?></td>
+                <td><?php echo $Batch ?></td>
+                <td><?php echo $Duration ?></td>
+                <td><?php echo $Teacher ?></td>
+                <td>
+                    <a href="updatecourse.php?edit=<?php echo $CourseID ?>" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="deletecourse.php?Del=<?php echo $CourseID ?>" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            <?php 
+               }                          
+            ?> 
+            </table>
+        </div>
+    </section>
 </body>   
        
 </html>

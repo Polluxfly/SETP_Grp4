@@ -5,15 +5,19 @@ session_start();
 $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
 mysqli_select_db($con,'sql6423581');
+error_reporting(0);
 
 $userid = "";
+$role = "";
 $status = "";
 $username = "";
 $email = "";
+$password = "";
 $gender = "";
 $nationality = "";
 $mobile = "";
 $dob = "";
+$email2 = "";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //connect to mysql database
@@ -28,13 +32,16 @@ function getData()
 {
     $data = array();
     $data[0]=$_POST['userid'];
-    $data[1]=$_POST['status'];
-    $data[2]=$_POST['username'];
-    $data[3]=$_POST['email'];
-    $data[4]=$_POST['gender'];
-    $data[5]=$_POST['nationality'];
-    $data[6]=$_POST['mobile'];
-    $data[7]=$_POST['dob'];
+    $data[1]=$_POST['role'];
+    $data[2]=$_POST['status'];
+    $data[3]=$_POST['username'];
+    $data[4]=$_POST['email'];
+    $data[5]=$_POST['password'];
+    $data[6]=$_POST['gender'];
+    $data[7]=$_POST['nationality'];
+    $data[8]=$_POST['mobile'];
+    $data[9]=$_POST['dob'];
+    $data[10]=$_POST['email2'];
     return $data;
 }
 
@@ -69,9 +76,9 @@ body {
             <ul>
                 <li><a href="homepage.php">Home Page</a></li>
                 <li><a href="createuser.php">Registration</a></li>
-                <li><a href="profile.php">Student Profile</a></li>
+                <li><a href="profile.php">User Profile</a></li>
                 <li><a href="coursedetails.php">Course Details</a></li>
-                <li><a href="enrollment.php">Enrollment</a></li>
+                <li><a href="adminenrollment.php">Enrollment</a></li>
                 <li><a href="#">Student Progress</a></li>
                 <li><a href="enquiry.php">Enquiries</a></li>
 
@@ -84,7 +91,7 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
-$update_query ="UPDATE `userinfo` SET status='$info[1]',username='$info[2]',email='$info[3]',gender='$info[4]',nationality='$info[5]',mobile='$info[6]',dob='$info[7]' WHERE userid = '$info[0]' and role='Student'";
+$update_query ="UPDATE `userinfo` SET role='$info[1]', status='$info[2]',username='$info[3]',email='$info[4]',password='$info[5]',gender='$info[6]',nationality='$info[7]',mobile='$info[8]',dob='$info[9]' WHERE userid = '$info[0]'";
 try{
     $update_result=mysqli_query($con,$update_query);
     if($update_result){
@@ -104,7 +111,7 @@ try{
 if(isset($_POST['search']))
 {   
     $info = getData();
-    $search_query = "SELECT * FROM `userinfo` WHERE userid='$info[0]' and role='Student'";
+    $search_query = "SELECT * FROM `userinfo` WHERE (userid='$info[0]' or email='$info[10]') ";
     $search_result = mysqli_query($con,$search_query);
     
         if($search_result)
@@ -114,14 +121,17 @@ if(isset($_POST['search']))
                 while($rows = mysqli_fetch_array($search_result))
                 {
                     $userid = $rows['userid'];
+                    $role = $rows['role'];
                     $status = $rows['status'];
                     $username = $rows['username'];
                     $email = $rows['email'];
+                    $password = $rows['password'];
                     $gender = $rows['gender'];
                     $nationality = $rows['nationality'];
                     $mobile = $rows['mobile'];
                     $dob = $rows['dob'];
-
+                    $email2 = $rows['email'];
+                    
                    
 
 				}
@@ -165,6 +175,7 @@ if(isset($_POST['delete']))
        <h1> Search </h1>
             <div class="form-group">
             <input type="number" name="userid" class="form-control" placeholder="Student ID" value="<?php echo ($userid);?>"><br>
+            <input type="email" name="email2" class="form-control" placeholder="Student Email" value="<?php echo ($email2);?>"><br>
             </div>
 
             <button class="btn4" name="search">Search</button><br>
@@ -173,27 +184,42 @@ if(isset($_POST['delete']))
 
 
             <div class="col-md-6 update-right">
-            <h1> Student Details </h1>
+            <h1> User Details </h1>
             <div class="form-group">
-            <input type="text" name="status" class="form-control" placeholder="Student Status" value="<?php echo ($status);?>"><br>
+            <select id="role" name="role">
+                            <option><?php echo ($role);?></option>
+                            <option value="Admin">Admin</option>
+                            <option value="Student">Student</option>
+                            </select>
+            </div><br>
+            <div class="form-group">
+            <select id="status" name="status">
+                            <option><?php echo ($status);?></option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            </select>
+            </div><br>
+
+            <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="User Name" value="<?php echo ($username);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Student Name" value="<?php echo ($username);?>"><br>
+            <input type="text" name="email" class="form-control" placeholder="User Email" value="<?php echo ($email);?>"><br>
+            </div>
+           <div class="form-group">
+            <input type="text" name="password" class="form-control" placeholder="User Password" value="<?php echo ($password);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="email" class="form-control" placeholder="Student Email" value="<?php echo ($email);?>"><br>
+            <input type="text" name="gender" class="form-control" placeholder="User Gender" value="<?php echo ($gender);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="gender" class="form-control" placeholder="Student Gender" value="<?php echo ($gender);?>"><br>
+            <input type="text" name="nationality" class="form-control" placeholder="User Nationality" value="<?php echo ($nationality);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="nationality" class="form-control" placeholder="Student Nationality" value="<?php echo ($nationality);?>"><br>
+            <input type="text" name="mobile" class="form-control" placeholder="User Mobile Number" value="<?php echo ($mobile);?>"><br>
             </div>
             <div class="form-group">
-            <input type="text" name="mobile" class="form-control" placeholder="Student Mobile Number" value="<?php echo ($mobile);?>"><br>
-            </div>
-            <div class="form-group">
-            <input type="date" name="dob" class="form-control" placeholder="Student Date of Birth" value="<?php echo ($dob);?>"><br>
+            <input type="date" name="dob" class="form-control" placeholder="User Date of Birth" value="<?php echo ($dob);?>"><br>
             </div>
 
             <button class="btn2" name="update">Update</button><br><br>
