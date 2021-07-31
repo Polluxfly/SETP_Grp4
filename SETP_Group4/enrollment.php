@@ -30,7 +30,7 @@
       }
    </style>
    <head>
-      <title>enrollmentpage</title>
+      <title>Enrollment Page</title>
       <link href="css/enrollment.css" rel="stylesheet" type="text/css" />
       <link rel="stylesheet" href="Bootstrap/bootstrap.css">
    </head>
@@ -42,10 +42,9 @@
             <li><a href="studenthome.php">Home Page</a></li>
             <li><a href="studentprofile.php">My Profile</a></li>
             <li><a href="enrollment.php">Enrollment</a></li>
-            <li><a href="#">My Progress</a></li>
          </ul>
       </div>
-      <div class="container" style="position: absolute; top: 45%; left: 12%;">
+      <div class="messagebox">
          <div class="row">
             <div class="col-sm-6">
                <div class="">
@@ -109,6 +108,7 @@
 								   }
 							    if ($Row['appealstatus'] == 0)
 								    {
+									$id = $Row['enrollmentid'];
 								    echo "<td><a href=\"appeal.php?id=$id\"><button class=\"btn btn-danger btn-sm\" style=\"right: 50px\">Appeal</button></a></td>";
 								    } else {
 								    echo "<td> Appealed </td>";	

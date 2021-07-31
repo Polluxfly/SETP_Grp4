@@ -29,7 +29,7 @@ $result = mysqli_query($con, $query);
 <html>
 <style>
 body {
-  background-image: url("normalpage_back.jpg");
+  background-image: url("studenthomepage_back.jpg");
 }
 
 </style>

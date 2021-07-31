@@ -9,7 +9,7 @@ if(!isset($_SESSION['userid'])){
 <html>
 <style>
 body {
-  background-image: url("homepage_back.jpg");
+  background-image: url("studenthomepage_back.jpg");
 }
 </style>
 <head>
