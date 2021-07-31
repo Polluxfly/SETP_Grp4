@@ -13,7 +13,7 @@ Show edit when status == 1;
 
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Admin Enrollment</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>

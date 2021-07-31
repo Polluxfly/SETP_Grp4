@@ -33,7 +33,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Search Results</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>

@@ -6,7 +6,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Course Details</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>

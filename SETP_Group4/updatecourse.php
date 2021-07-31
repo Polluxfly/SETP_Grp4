@@ -65,7 +65,7 @@ body {
 
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Update Course Details</title>
     <link href="css/createuser.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
