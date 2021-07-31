@@ -29,7 +29,6 @@ Show edit when status == 1;
             <li><a href="profile.php">Student Profile</a></li>
             <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="adminenrollment.php">Enrollment</a></li>
-            <li><a href="#">Student Progress</a></li>
             <li><a href="enquiry.php">Enquiries</a></li>
         </ul>
     </div>
