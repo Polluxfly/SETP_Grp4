@@ -73,7 +73,6 @@ body {
                 <li><a href="studenthome.php">Home Page</a></li>
                 <li><a href="studentprofile.php">My Profile</a></li>
                 <li><a href="enrollment.php">Enrollment</a></li>
-                <li><a href="#">My Progress</a></li>
 
             </ul>
         </div>
