@@ -7,11 +7,20 @@
    	}
    
    $loginuser = $_SESSION['userid'];
-   	
    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-   $query = " SELECT * FROM `enrollmentinfo` WHERE userid='$loginuser'; ";
    mysqli_select_db($con,'sql6423581');
-   $result = mysqli_query($con, $query);
+   
+   $namequery = "select username from userinfo where userinfo.userid = '$loginuser'";   
+
+   $nameresult = mysqli_query($con, $namequery);
+      
+	if($nameresult->num_rows>0)
+	{
+		while($row=$nameresult->fetch_assoc())
+		{
+		$user_name = $row['username'];
+		}
+	}
    
    ?>
 <html>
@@ -21,7 +30,7 @@
       }
    </style>
    <head>
-      <title>enrollmentpage</title>
+      <title>Enrollment Page</title>
       <link href="css/enrollment.css" rel="stylesheet" type="text/css" />
       <link rel="stylesheet" href="Bootstrap/bootstrap.css">
    </head>
@@ -32,65 +41,91 @@
          <ul>
             <li><a href="studenthome.php">Home Page</a></li>
             <li><a href="studentprofile.php">My Profile</a></li>
-            <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="enrollment.php">Enrollment</a></li>
-            <li><a href="#">My Progress</a></li>
          </ul>
       </div>
-      <div class="container" style="position: absolute; top: 45%; left: 15%">
+      <div class="messagebox">
          <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-6">
                <div class="">
-			   <span>
-                  <h1>Enroll in a course now ! <?php echo $_SESSION['username'] ?></h1>
-               </span>
-			   </div>
+                  <span>
+                     <h1>Enroll in a course now ! <?php echo $user_name; ?></h1>
+                  </span>
+               </div>
             </div>
-            <div class="col-sm">
-			  <div class="wrap">
-               <table class="">
-                  <tr class="">
-                     <td> Enrollment ID </td>
-                     <td> Course ID </td>
-                     <td> Course Level </td>
-                     <td colspan="7"> Status </td>
-                  </tr>
-                  <?php 
-                     while($row=mysqli_fetch_assoc($result))
-                     {
-                         $EnrollmentID= $row['enrollmentid'];
-                         /*$UserID= $row[$_SESSION['userid']];*/
-                         $CourseID= $row['courseid'];
-                         $CourseLevel = $row['courselevel'];
-                         $PaymentStatus = $row['paystatus'];
-                         
-                         
+            <div class="col-sm-6" >
+               <div class="">
+                  <?php
+                     $SQL = 	" SELECT *
+                     		  FROM enrollmentinfo AS e
+                     		  INNER JOIN courseinfo AS c 
+                     		  ON e.courseid = c.courseid
+                     		  INNER JOIN userinfo AS u
+                     		  ON e.userid = u.userid
+                     		  WHERE c.status = '1' AND u.status = 'Active' AND u.userid = '$loginuser' ORDER BY paystatus";
+                     $result = mysqli_query($con, $SQL) or die('A error occured: ');
+                     $number_of_rows = mysqli_num_rows($result);
+                     	echo '<table class="table-scroll small-first-col">';
+                     echo '<thead>';
+                     	echo '<tr>';
+                     	echo '  <th>Enrollment ID </th>';
+                     	echo '  <th>Course ID </th>';
+                     	echo '  <th>Course Level </th>';
+                     	echo '  <th>Course Fee </th>';
+						echo '	<th>Payment Status</th>';
+						echo '<th>Action</th>';
+					    echo '  <th>Appeal </th>';
+                     echo '</thead>';
+                     	echo '</tr>';
+                     
+                     	while ($Row = mysqli_fetch_assoc($result)) {
+                     			echo '<tr>';
+                     			echo '<td>' . $Row['enrollmentid'] . '</td>';
+                     			echo '<td>' . $Row['courseid'] . '</td>';
+                     			echo '<td>' . $Row['courselevel'] . '</td>';
+								echo '<td>' . '$' .$Row['coursefee'] . '</td>';
+								// button for appeal.
+								
+								// condition to show paid or not paid
+								if($Row['paystatus'] == 0)
+									{
+									echo "<td> Not Yet</td>";
+									}
+									else
+									{
+									echo "<td> Paid</td>";
+									}
+								// if paid show button else show an empty block.
+								// button will redirect to the paypage with id based on enrollmentid
+								if ($Row['paystatus'] == '0')
+								    { 
+								    $id = $Row['enrollmentid'];
+								    echo "<td><a href=\"paypage.php?id=$id\"><button class=\"btn btn-primary btn-sm\" style=\"right: 50px\">Pay</button></a></td>";
+								    } 
+								    else
+								    { 
+								    echo"<td>  </td>";
+								   }
+							    if ($Row['appealstatus'] == 0)
+								    {
+									$id = $Row['enrollmentid'];
+								    echo "<td><a href=\"appeal.php?id=$id\"><button class=\"btn btn-danger btn-sm\" style=\"right: 50px\">Appeal</button></a></td>";
+								    } else {
+								    echo "<td> Appealed </td>";	
+								    }
+                                echo '</tr>';
+                           }
+                        echo '</table>'
                      ?>
-                  <tr>
-                     <td><?php echo $EnrollmentID ?></td>
-                     <td><?php echo $CourseID ?></td>
-                     <td><?php echo $CourseLevel ?></td>
-                     <td><?php if ($PaymentStatus == 1) : ?>
-                        <a href="studenthome.php"> Paid </a>
-                        <?php else : ?>
-                        <a href="paypage.php"> Not Yet </a> 
-                        <?php endif; ?>
-                     </td>
-                     <!--td><a href="view.php?success=<?php echo $EnrollmentID ?>" class="btn btn-success btn-sm">View</a></td>
-                        <td><a href="adminedit.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a></td>
-                        <td><a href="delete.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a></td-->
-                  </tr>
-                  <?php 
-                     }                          
-                     ?> 
-               </table>
-			   </div>
+               </div>
+            </div>
+            
+                                            
+                 
+               </div>
             </div>
          </div>
       </div>
-      <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-      <script src="assets/js/bs-init.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
    </body>
 </html>
 

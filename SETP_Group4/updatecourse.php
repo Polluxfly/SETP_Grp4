@@ -26,14 +26,15 @@ if(isset($_GET['edit']))
                     $Batch = $row['batch'];
                     $Duration = $row['duration'];
                     $Teacher = $row['teacher']; 
+                    
                     if($row['status'] == 0)
                         $Status = "Deactive";
                     else
-                        $Status = "Active";  
-				}
-			}else{
+                        $Status = "Active";
+                }
+            }else{
                 echo("Course Not Found !");     
-			}
+            }
         }
     }catch(Exception $ex){
         echo ("Error in Search Current Course ID".$ex ->getMessage());

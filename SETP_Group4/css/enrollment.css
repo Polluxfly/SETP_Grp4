@@ -1,9 +1,15 @@
 
 body {
     background-size: cover;
-    background-position: 100% 24.8%;
+    background-position: center;
 }
 
+.homepic img {
+    padding-left: 500px;
+    padding-top: 0px;
+    width: 1450px;
+    height: 465px;
+}
 
 .companylogo img {
     float: left;
@@ -255,37 +261,232 @@ span{
     100%{opacity:1;}
 }
 
-.wrap {
-    position: absolute;
-	padding: 15px;
-    left: 65%;
-    top: 80%;
-    transform: translate(-50%,-50%);
+.table-scroll {
+    display: block;
+    empty-cells: show;
+    border-spacing: 0;
+    background-color:#fff;
 }
 
-th{
-    background:#636161;
-    padding:10px;
-    font-size:15px;
-    
+.table-scroll thead {
+    background-color: #fff;
+    position: relative;
+    display: block;
+    overflow-y: scroll;
+}
+
+.table-scroll tbody {
+    display: block;
+    position: relative;
+    overflow-y: scroll;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.table-scroll tr {
+    display: flex;
+}
+    .table-scroll th {
+        font-weight: 700;
+        font-size: 16px;
+        background-color: #48c1f6;
+        color:#fff;
+        font-family:sans-serif;
+        padding:10px;
+        text-align:left;
+    }
+
+    .table-scroll td{
+
+        font-size:15px;
+        font-family:sans-serif;
+		height: 35px;
+		width: 10%;
+    }
+
+    .table-scroll td, .table-scroll th {
+        flex-basis: auto;
+        flex-grow: 2;
+        display: block;
+        text-align: left;
+    }
+
+.table-scroll.small-first-col td:first-child,
+.table-scroll.small-first-col th:first-child {
+        flex-basis: 20%;
+        flex-grow: 2;
+    }
+
+.body-half-screen {
+    max-height: 300px;
+}
+
+.small-col {
+    flex-basis: auto;
+}
+
+tr:nth-child(odd){
+    background-color:#f3f1f1;
+}
+
+.table-scroll tr:hover {
+    background-color: #636161;
+    color: #fff;
+}
+
+.body-half-screen {
+    max-height: 300px;
+}
+
+.small-col {
+    flex-basis: 10%;
+}
+
+tr:nth-child(odd) {
+    background-color: #f3f1f1;
+}
+
+.table-scroll2 tr:hover {
+    background-color: #636161;
+    color: #fff;
 }
 
 
-table, td{
-    width:100%;
-    table-layout:fixed;
-    font-size:12px;
-    padding:15px;
-    text-align:left;
-    border-collapse:collapse;
-    background: #808080;
-    color:#fff;
 
+
+
+.btn4 {
+    width: 400px;
+    height: 35px;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    outline: none;
+    border: 1px solid #636161;
+    position: relative;
+    z-index: 1;
+}
+
+    .btn4:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn4:before {
+        transition: 0.5s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0%;
+        opacity: 0;
+        content: "";
+        background-color: #388afb;
+    }
+
+    .btn4:hover:before {
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: -1;
+    }
+
+
+
+
+.btn2 {
+    width: 400px;
+    height: 35px;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    outline: none;
+    border: 1px solid #636161;
+    position: relative;
+    z-index: 1;
+}
+
+    .btn2:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn2:before {
+        transition: 0.5s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0%;
+        opacity: 0;
+        content: "";
+        background-color: #83f372;
+    }
+
+    .btn2:hover:before {
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: -1;
+    }
+
+.selection {
+    width: 400px;
+    height: 38px;
+    border-radius: 4px;
+    border-color: #cecece;
 }
 
 
-table, td:hover{
-    background:;
-    color:black;
+h5 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: #185cb5;
 }
 
+h4 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 15px;
+    color: #000000;
+    padding-top: 5px;
+}
+
+
+
+p {
+    padding-left: 16px;
+    animation: blink 1s linear;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.messagebox {
+    margin: auto;
+    height: auto;
+    padding: 10px;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	right: 5%;
+	
+}

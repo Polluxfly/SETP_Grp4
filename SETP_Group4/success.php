@@ -1,19 +1,15 @@
 <?php
-    if(!empty($_GET['tid'] && !empty($_GET['product']))) {
-        $GET = filter_var_array($_GET, FILTER_SANITIZE_STRING);
-
-        $tid = $GET['tid'];
-        $product = $GET['product'];
-    } 
-    else {
-        header('Location: homepage.php');
+session_start();
+if(!isset($_SESSION['userid'])){
+    header('location:index.php');
     }
+
 ?>
 
 <html>
 <style>
 body {
-  background-image: url("homepage_back.jpg");
+  background-image: url("studenthomepage_back.jpg");
 }
 </style>
 <head>
@@ -31,12 +27,12 @@ body {
 
         <div class="container mt-4">
         <span>
-	<h2> Thank you for purchasing <?php echo $product; ?></h2>
+	<h2> Thank you for purchasing</h2>
         <hr>
-        <p>Your transaction ID is <?php echo $tid; ?></p>
+        <p>Your purchase is successful</p>
         <p>Check your email for the invoice</p>
-	<p><a href="homepage.php" class="clickme">Back to homepage</p>
+	<p><a href="studenthome.php" class="clickme">Back to Home Page</p>
         </span>  
-    </div>
+   	</div>
 </body>
 </html>
