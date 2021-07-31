@@ -86,7 +86,7 @@ body {
                         $EnrollmentID = $row["enrollmentid"];
                         $CourseID = $row["courseid"];
                         $CourseLevel = $row['courselevel'];
-    
+                        $AppealStatus = $row['appealstatus'];
                         $StudentName = $row['username'];
                         if($row['paystatus'] == 0)
                             $Status = "Not Yet";
@@ -103,7 +103,14 @@ body {
                 <td><?php echo $StudentName ?></td>
                 <td><?php echo $Status ?></td>
                 <td>
-                    <a href="updateenrollment.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
+                    <?php  
+                        if($AppealStatus == 1) 
+                        {
+                            ?>
+                            <a href="updateenrollment.php?edit=<?php echo $EnrollmentID ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <?php
+                        }
+                    ?> 
                     <a href="deleteenrollment.php?Del=<?php echo $EnrollmentID ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>

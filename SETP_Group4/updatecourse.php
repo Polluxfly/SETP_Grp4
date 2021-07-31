@@ -107,11 +107,11 @@ body {
 
                     <div class="form-group">
                         <label>Course Fee</label>
-                        <input type="int" name="coursefee" class="form-control" value="<?php echo ($CourseFee);?>" required>
+                        <input type="number" name="coursefee" class="form-control" value="<?php echo ($CourseFee);?>" required>
                     </div><br>
                     <div class="form-group">
                         <label>Duration (Month)</label>
-                        <input type="text" name="duration" class="form-control"  value="<?php echo ($Duration);?>" required>
+                        <input type="number" name="duration" class="form-control"  value="<?php echo ($Duration);?>" required>
                     </div><br>
                     <div class="form-group">
                         <label>Teacher</label>
@@ -119,26 +119,37 @@ body {
                     </div><br>
                     <div class="form-group">
                         <label>Batch</label>
-                        <input type="text" name="batch" class="form-control"  value="<?php echo ($Batch);?>" required>
+                        <input type="number" name="batch" class="form-control"  value="<?php echo ($Batch);?>" required>
                     </div><br>
 
                     <button class="btn2" name="update">Update</button><br><br>
                     <a href="coursedetails.php" class="btn btn-danger">Return to last page</a>
 
 <?php
+$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+
+mysqli_select_db($con,'sql6423581');
+if($con->connect_error){
+    die("Connection failed". $con->connect_error);  
+    }
+
 if(isset($_GET['edit']))
     $CourseID = $_GET['edit'];
 
-if(isset($_POST['update'])){
+if(isset($_POST['update']))
+{
     $info = getData();   
 
-    $query ="UPDATE `courseinfo` SET coursefee='$info[1]', courselevel='$info[2]',
-    batch='$info[3]', duration='$info[4]', teacher='$info[5]',status=$info[6] 
-    WHERE courseid = '".$CourseID."'";
+    $query ="UPDATE courseinfo SET coursefee='$info[1]', courselevel='$info[2]',
+        batch='$info[3]', duration='$info[4]', teacher='$info[5]' 
+        WHERE `courseinfo`.courseid = '".$CourseID."'";
 
+    $statusquery = "UPDATE courseinfo SET courseinfo.status=$info[6] 
+        WHERE `courseinfo`.courseid = '".$CourseID."'";
     try{
         $result=mysqli_query($con,$query);
-        if($result){
+        $statusresult=mysqli_query($con,$statusquery);
+        if($result || $statusresult){
             if(mysqli_affected_rows($con)>0)
             {
                 echo("Details Updated !");
@@ -148,7 +159,8 @@ if(isset($_POST['update'])){
                 header("location:coursedetails.php");
             }
         }
-    }catch(Exception $ex){
+    }
+    catch(Exception $ex){
         echo("Error In Update".$ex->getMessage());
     }
 
