@@ -112,7 +112,7 @@ ul {
         background-color: #48c1f6;
         color:#fff;
         font-family:sans-serif;
-        padding:15px;
+        padding:15px 0 15px 0;
         text-align:left;
     }
 
@@ -188,7 +188,7 @@ tr:nth-child(odd){
         background-color: #38ebc5;
         color: #fff;
         font-family: sans-serif;
-        padding: 15px;
+        padding: 15px 0 15px 0;
         text-align: left;
     }
 
