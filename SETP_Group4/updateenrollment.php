@@ -131,7 +131,7 @@ if(isset($_POST['update'])){
     if($isValueValid)
     {
         $query ="UPDATE `enrollmentinfo` SET courseid='$info[1]', userid='$info[2]',
-        paystatus='$info[3]', appealstatus=0 WHERE enrollmentid = '".$EnrollmentID."'";
+        paystatus=$info[3], appealstatus=0 WHERE enrollmentid = '".$EnrollmentID."'";
 
         try{
             $result=mysqli_query($con,$query);
@@ -150,8 +150,6 @@ if(isset($_POST['update'])){
         }
 
     }
-
-
 }
 
 
