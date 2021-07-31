@@ -1,34 +1,35 @@
+
+
 <?php
 
-$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-
-mysqli_select_db($con,'sql6423581');
-if($con->connect_error){
-    die("Connection failed". $con->connect_error);  
+    try{
+        $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
+    }catch(mysqli_Sql_Exception $ex)
+    {
+        echo("error in connecting");
     }
+
+    mysqli_select_db($con,'sql6423581');
+
 
     if(isset($_GET['Del']))
     {
         $CourseID = $_GET['Del'];
-        echo($CourseID);
-        $query = "DELETE FROM `courseinfo` WHERE `courseinfo`.`courseid` = '".$CourseID."'";
-        echo($query);
+        echo($CourseID[2]);
+        $query = "DELETE FROM courseinfo WHERE courseid = '".$CourseID."'";
         try{
-            $result = mysqli_query($con, $query);
-            echo($result);
+            $result= mysqli_query($con,$query);
             if($result)
             {
-                echo("Student n!");
                 if(mysqli_affected_rows($con)>0)
                 {
-                    echo("Student Deleted!");
+                    echo("Student Deleted !");
                     header("location:coursedetails.php");
                 }else{
                     echo("Data Not Deleted");
                     header("location:coursedetails.php ");
                 }
             }
-            echo("Student d!");
         }catch(Exception $ex){
             echo ("Error in Delete".$ex ->getMessage());
         }

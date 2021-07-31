@@ -1,13 +1,3 @@
-<?php
-//connect to mysql database
-// try{
-//     $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
-// }catch(mysqli_Sql_Exception $ex)
-// {
-//     echo("error in connecting");
-// }
-?>
-
 <html>
 <style>
 body {
@@ -16,7 +6,7 @@ body {
 </style>
 <head>
 
-    <title>Course Details</title>
+    <title>OH, Hi YO !</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -27,7 +17,7 @@ body {
     
     <div class="navigation">
         <ul>
-                <li><a href="homepage.php">Home Page</a></li>
+            <li><a href="homepage.php">Home Page</a></li>
                 <li><a href="createuser.php">Registration</a></li>
                 <li><a href="profile.php">User Profile</a></li>
                 <li><a href="coursedetails.php">Course Details</a></li>
@@ -88,33 +78,55 @@ $Duration = (isset($_POST['duration']) ? $_POST['duration'] : '');
 $Teacher = (isset($_POST['teacher']) ? $_POST['teacher'] : '');
 $CourseFee = (isset($_POST['coursefee']) ? $_POST['coursefee'] : '');
 
-$con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
-mysqli_select_db($con,'sql6423581');
+    $con = mysqli_connect('sql6.freesqldatabase.com:3306','sql6423581','zjlFur9zEL');
 
-
+    mysqli_select_db($con,'sql6423581');
+    
+    
 if($con->connect_error){
 die("Connection failed". $con->connect_error);  
 }
 
-
 if(isset($_POST['Add'])){
-    $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher, status, coursefee)
-        VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher', $Status,  '$CourseFee')";
-try{
-    $result=$con -> query($query);
-    if($result){
-     if(mysqli_affected_rows($con)>0)
-     {
-      echo("New Course Added!");
-	 }else{
-      echo("Failed to add Course!");
-     }
+    $isValueValid = true;
+    if($Batch == 0)
+    {
+        echo("<br>Batch Value is invalid, failed to add Course!");
+        $isValueValid = false;
     }
-}catch(Exception $ex){
-    echo("Error In Update".$ex->getMessage());
+    if($CourseFee == 0)
+    {
+        echo("<br>CourseFee Value is invalid, failed to add Course!");
+        $isValueValid = false;
+    }
+    if($Duration == 0)
+    {
+        echo("<br>Duration Value is invalid, failed to add Course!");
+        $isValueValid = false;
+    }
+
+    if($isValueValid)
+    {
+        $query ="INSERT INTO courseinfo (courselevel, batch, duration, teacher, status, coursefee)
+            VALUES ('$CourseLevel', '$Batch', '$Duration', '$Teacher', $Status,  '$CourseFee')";
+        try{
+            $result=$con -> query($query);
+            if($result){
+                if(mysqli_affected_rows($con)>0)
+                {
+                echo("New Course Added!");
+                }else{
+                echo("Failed to add Course!");
+                }
+            }
+        }catch(Exception $ex){
+            echo("Error In Update".$ex->getMessage());
+        }
+    }
 }
-}
+
+
 ?>
    </form>
     </section>

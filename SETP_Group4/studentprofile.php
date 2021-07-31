@@ -72,7 +72,7 @@ body {
             <ul>
                 <li><a href="studenthome.php">Home Page</a></li>
                 <li><a href="studentprofile.php">My Profile</a></li>
-                <li><a href="enrollment.php">Course Details</a></li>
+                <li><a href="enrollment.php">Enrollment</a></li>
 
             </ul>
         </div>
