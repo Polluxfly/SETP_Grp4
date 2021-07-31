@@ -62,7 +62,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>User Profile</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -74,12 +74,14 @@ body {
         
         <div class="navigation">
             <ul>
-            <li><a href="homepage.php">Home Page</a></li>
-            <li><a href="createuser.php">Registration</a></li>
-            <li><a href="profile.php">Student Profile</a></li>
-            <li><a href="coursedetails.php">Course Details</a></li>
-            <li><a href="adminenrollment.php">Enrollment</a></li>
-            <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="homepage.php">Home Page</a></li>
+                <li><a href="createuser.php">Registration</a></li>
+                <li><a href="profile.php">User Profile</a></li>
+                <li><a href="coursedetails.php">Course Details</a></li>
+                <li><a href="adminenrollment.php">Enrollment</a></li>
+                <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="report.php">Management Reports</a></li>
+
             </ul>
         </div>
          <div class="messagebox"><h3>
@@ -89,7 +91,12 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
+$check = "SELECT * FROM `userinfo` WHERE  userid <> '$info[0]' and email='$info[4]' ";
 $update_query ="UPDATE `userinfo` SET role='$info[1]', status='$info[2]',username='$info[3]',email='$info[4]',password='$info[5]',gender='$info[6]',nationality='$info[7]',mobile='$info[8]',dob='$info[9]' WHERE userid = '$info[0]'";
+$check_result = mysqli_query($con,$check);
+if(mysqli_num_rows($check_result)>0)
+{ echo("The Email is taken. Try another.");}
+else{
 try{
     $update_result=mysqli_query($con,$update_query);
     if($update_result){
@@ -104,7 +111,7 @@ try{
     echo("Error In Update".$ex->getMessage());
 }
 }
-
+}
 //search
 if(isset($_POST['search']))
 {   
@@ -194,7 +201,8 @@ if(isset($_POST['delete']))
             <select id="status" name="status">
                             <option><?php echo ($status);?></option>
                             <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
+                            <option value="Graduated">Graduated</option>
+                            <option value="Withdrawn">Withdrawn</option>
                             </select>
             </div><br>
 
