@@ -291,7 +291,7 @@ span{
         background-color: #48c1f6;
         color:#fff;
         font-family:sans-serif;
-        padding:10px;
+        padding:15px 0 15px 0;
         text-align:left;
     }
 
@@ -304,7 +304,7 @@ span{
     }
 
     .table-scroll td, .table-scroll th {
-        flex-basis: auto;
+        flex-basis: 20%;
         flex-grow: 2;
         display: block;
         text-align: left;
