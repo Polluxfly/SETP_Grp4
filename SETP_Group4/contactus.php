@@ -14,7 +14,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Contact Us</title>
     <link href="css/contactus.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>

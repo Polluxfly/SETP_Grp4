@@ -12,7 +12,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>About Us</title>
     <link href="css/aboutus.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
