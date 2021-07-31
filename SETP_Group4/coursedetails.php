@@ -23,6 +23,7 @@ body {
             <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="adminenrollment.php">Enrollment</a></li>
             <li><a href="enquiry.php">Enquiries</a></li>
+            <li><a href="report.php">Management Reports</a></li>
         </ul>
     </div>
         
