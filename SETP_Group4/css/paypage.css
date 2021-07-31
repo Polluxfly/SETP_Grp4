@@ -207,6 +207,14 @@ header .limiter{
     margin: 0px auto;
 }
 
+h2 {
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+
 header h3{
     font: normal 24px/1.5 'Open Sans', sans-serif;
     float: left;
@@ -244,4 +252,14 @@ header a:hover{
         float: none;
     }
 
+}
+
+.messagebox {
+    margin: auto;
+    height: auto;
+    padding: 10px;
+    position: absolute; 
+	width: 500px; 
+	top: 35%; 
+	left: 40%
 }

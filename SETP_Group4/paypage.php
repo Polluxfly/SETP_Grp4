@@ -58,11 +58,11 @@ body {
        <div class="blink">
        <br>
        <span>
-        <h2 style="text-align: center;">Check out</h2>
-        <h3 style="text-align: center;">Choose a payment for <b>Course <?php echo $course_level?> </b></h3>
+        <h2>Check out</h2>
+        <h3>Choose a payment for <b>Course <?php echo $course_level?> </b></h3>
        </span>
        </div>
-       <div class="" style="position: absolute; width: 500px; top: 35%; left: 40%">
+       <div class="messagebox">
        <h1>Confirm Purchase</h1>
             <div class="payment">
                 <form action="paypage.php?id=<?php echo $enrolledid ?>" method="POST">
@@ -153,7 +153,7 @@ body {
 
 								else
 								{	
-									echo $enrolledid;
+									//echo $enrolledid;
 									$updatequery = " UPDATE `enrollmentinfo` SET `paystatus`=1 WHERE enrollmentid = $enrolledid; ";
 									try{
 										$updateresult= mysqli_query($con, $updatequery);
