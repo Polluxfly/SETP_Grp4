@@ -1,8 +1,9 @@
 
 body {
     background-size: cover;
-    background-position: 100% 24.8%;
+    background-position: center;
 }
+
 
 .companylogo img {
     float: left;
@@ -10,17 +11,15 @@ body {
     padding-top: 10px;
     width: 430px;
     height: 125px;
-    position: absolute;
-    top: 3%;
 }
 
-.companylogo h1{
+.companylogo h1 {
     padding: 22px 20px;
-    height:80px;
+    height: 80px;
     float: left;
-    font-size:24px;
-    font-weight:bold;
-    text-transform:uppercase;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
     color: #fff;
 }
 
@@ -31,11 +30,7 @@ ul {
     padding: 0;
     display: flex;
     color: #fff;
-    text-decoration:none;
-    position: absolute;
-    right: 55;
-    top: 13;
-
+    text-decoration: none;
 }
 
     ul li a {
@@ -47,20 +42,16 @@ ul {
         text-transform: uppercase;
     }
 
-    ul li a:hover {
-        background: rgba(0,0,0,0.5);
-        border-radius: 6px;
-        color: #fff;
-    }
-
+        ul li a:hover {
+            background: rgba(0,0,0,0.5);
+            border-radius: 6px;
+            color: #fff;
+        }
 .logout {
     float: right;
     padding: 10px 10px;
     font-size: 10px;
     color: #000000;
-    position: absolute;
-    top: 10;
-    right: 1;
 }
 
     .logout:hover {
@@ -68,198 +59,69 @@ ul {
     }
 
 
-
-.blink{
-    top:20%;
-    left:50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-}
-
-span{
-    font-size:4em;
-    letter-spacing:8px;
-    font-family: Arial clack;
-    text-transform: uppercase;
-    animation:blink 3s linear ;
-    color:#808080;
-
-}
-
-@keyframes blink{
-    0%{opacity:0;}
-    50%{opacity: 0.5;}
-    100%{opacity:1;}
-}
-
-.creditCardForm {
-    max-width: 700px;
-    background-color: #fff;
-    margin: 100px auto;
-    overflow: hidden;
-    padding: 25px;
-    color: #4c4e56;
-}
-
-.creditCardForm label {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.creditCardForm .heading h1 {
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    color: #4c4e56;
-}
-
-.creditCardForm .payment {
-    float: left;
-    font-size: 18px;
-    padding: 10px 25px;
-    margin-top: 20px;
-    position: relative;
-}
-
-.creditCardForm .payment .form-group {
-    float: left;
-    margin-bottom: 15px;
-}
-
-.creditCardForm .payment .form-control {
-    line-height: 40px;
-    height: auto;
-    padding: 0 16px;
-}
-
-.creditCardForm .owner {
-    width: 63%;
-    margin-right: 10px;
-}
-
-.creditCardForm .CVV {
-    width: 35%;
-}
-
-.creditCardForm #card-number-field {
-    width: 100%;
-}
-
-.creditCardForm #expiration-date {
-    width: 49%;
-}
-
-.creditCardForm #credit_cards {
-    width: 50%;
-    margin-top: 25px;
-    text-align: right;
-}
-
-.creditCardForm #pay-now {
-    width: 100%;
-    margin-top: 25px;
-}
-
-.creditCardForm .payment .btn {
-    width: 100%;
-    margin-top: 3px;
-    font-size: 24px;
-    background-color: #2ec4a5;
-    color: white;
-}
-
-.creditCardForm .payment select {
-    padding: 10px;
-    margin-right: 15px;
-}
-
-.transparent {
-    opacity: 0.2;
-}
-
-@media(max-width: 650px) {
-    .creditCardForm .owner,
-    .creditCardForm .CVV,
-    .creditCardForm #expiration-date,
-    .creditCardForm #credit_cards {
-        width: 100%;
-    }
-    .creditCardForm #credit_cards {
-        text-align: left;
-    }
-}
-/*start here*/
-.container-fluid{
-    padding:0;
-    margin:0;
-}
-
-header{
-    box-sizing: border-box;
-    text-align: center;
-    width: 100%;
-    padding: 25px 40px;
-    background-color: #3A56B7;
-    overflow: hidden;
-}
-
-header .limiter{
-    max-width: 1000px;
-    margin: 0px auto;
-}
-
 h2 {
-	text-align: center;
+    padding-bottom: 10px;
 }
 
-h3 {
-	text-align: center;
+.form-group {
+    padding-top: 10px;
 }
 
-header h3{
-    font: normal 24px/1.5 'Open Sans', sans-serif;
-    float: left;
-    color: #fff;
-    margin:0;
+.container {
+    padding-top: 40px;
 }
 
-header a{
-    color:#fff;
-    text-decoration: none;
-    display: inline-block;
-    padding: 13px 50px;
-    border-radius: 3px;
-    font: bold 14px/1 'Open Sans', sans-serif;
-    text-transform: uppercase;
-    background-color:#F05283;
-    opacity: 0.9;
+.payment-box {
+    width: 1500px;
+    padding-left: 400px;
+    padding-top: 100px;
 }
 
-header a:hover{
-    color: #fff;
-    text-decoration: none;
-    opacity: 1;
+.payment-left {
+    background-color: rgba(211,211,211,0.5);
+    padding: 20px;
+}
+select {
+    height: 38px;
+    border-radius: 4px;
+    border-color: #cecece;
 }
 
-@media (max-width: 850px) {
+.btn2 {
+    width: 538px;
+    height: 42px;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    outline: none;
+    border: 1px solid #636161;
+    position: relative;
+    z-index: 1;
+}
 
-    header h3{
-        float: none;
-        text-align: center;
+    .btn2:hover {
+        color: #fff;
+        cursor: pointer;
     }
 
-    header a{
-        margin-top: 20px;
-        float: none;
+    .btn2:before {
+        transition: 0.5s all ease;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 50%;
+        bottom: 0%;
+        opacity: 0;
+        content: "";
+        background-color: #83f372;
     }
 
-}
-
-.messagebox {
-    margin: auto;
-    height: auto;
-    padding: 10px;
-    position: absolute; 
-	width: 500px; 
-	top: 35%; 
-	left: 40%
-}
+    .btn2:hover:before {
+        transition: 0.5s all ease;
+        left: 0;
+        right: 0;
+        opacity: 1;
+        z-index: -1;
+    }

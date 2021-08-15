@@ -58,7 +58,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>My Profile</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>

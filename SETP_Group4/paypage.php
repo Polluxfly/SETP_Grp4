@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if(!isset($_SESSION['userid'])){
@@ -23,6 +22,7 @@ $result = mysqli_query($con, $query);
 	if($result->num_rows>0) {
 		while($row=$result->fetch_assoc()){
 			$course_level = $row['courselevel'];
+            $course_fee = $row['coursefee'];
 		}
 	}
 ?>
@@ -35,10 +35,9 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Make Payment</title>
     <link href="css/paypage.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 
   
 </head>
@@ -54,34 +53,37 @@ body {
 
             </ul>
         </div>
-        
-       <div class="blink">
-       <br>
-       <span>
-        <h2>Check out</h2>
-        <h3>Choose a payment for <b>Course <?php echo $course_level?> </b></h3>
-       </span>
-       </div>
-       <div class="messagebox">
-       <h1>Confirm Purchase</h1>
-            <div class="payment">
-                <form action="paypage.php?id=<?php echo $enrolledid ?>" method="POST">
-                    <div class="form-group owner">
+       
+
+       <div class="container">
+            <div class="payment-box">
+            <div class="row">
+                <div class="col-md-6 payment-left">
+
+        <h4>Confirm Payment for - <b>Course <?php echo $course_level?> </b></h4>
+        <h5>Total : $ <?php echo $course_fee?> </h5>
+        <form action="paypage.php?id=<?php echo $enrolledid ?>" method="POST">
+
+                    <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" class="form-control" name="name" required>
                     </div>
-                    <div class="form-group owner">
+
+                    <div class="form-group">
                         <label for="email">Email-Address</label>
                         <input type="text" class="form-control" name="email" required>
                     </div>
-                    <div class="form-group CVV">
+
+                    <div class="form-group">
                         <label for="cvv">CVV</label>
                         <input type="tel" class="form-control" name="cvv" maxlength="4" required>
                     </div>
+
                     <div class="form-group" name="card-number-field">
                         <label for="cardnumber">Card Number</label>
                         <input type="tel" class="form-control" name="cardnumber" maxlength="16" required>
                     </div>
+
                     <div class="form-group" name="expiration">
                         <label>Expiration Date</label>
                         <select>
@@ -113,7 +115,7 @@ body {
                         <img src="amex.jpg" name="amex">
                     </div>
                     <div class="form-group" name="pay-now">
-                        <button type="submit" class="btn btn-primary" name="Confirm">Confirm</button>
+                        <button type="submit" class="btn2" name="Confirm">Confirm</button>
 						
 						<?php 
 							$FullName = (isset($_POST['name']) ? $_POST['name'] : '');
@@ -179,4 +181,3 @@ body {
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
-

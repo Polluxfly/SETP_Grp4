@@ -13,7 +13,7 @@ Show edit when status == 1;
 
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Admin Enrollment</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -30,6 +30,7 @@ Show edit when status == 1;
             <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="adminenrollment.php">Enrollment</a></li>
             <li><a href="enquiry.php">Enquiries</a></li>
+            <li><a href="report.php">Management Reports</a></li>
         </ul>
     </div>
         
@@ -40,11 +41,11 @@ Show edit when status == 1;
 
             <div class="form-group">
                 <label>Course ID</label>
-                <input type="int" name="courseid" class="form-control" required>
+                <input type="number" name="courseid" class="form-control" required>
             </div><br>
             <div class="form-group">
                 <label>Student ID</label>
-                <input type="int" name="userid" class="form-control" required>
+                <input type="number" name="userid" class="form-control" required>
             </div><br>
 
             <button type="submit" class="btn2" name="Add">Add</button><br><br>
@@ -83,7 +84,7 @@ if(isset($_POST['Add'])){
         $isValueValid = false;
         echo("<br>Course ID is invalid!");
     }
-
+ 
     if(!$isValueValid)
     {
         echo("<br>Failed to add Enrollment.");
@@ -115,11 +116,11 @@ if(isset($_POST['Add'])){
             <div class="messagebox"><h4> Search Enrollment </h4></div>
             <div class="form-group">
                 <label>Course ID</label>
-                <input type="int" name="courseid" class="form-control">
+                <input type="number" name="courseid" class="form-control">
             </div><br>
             <div class="form-group">
                 <label>Student ID</label>
-                <input type="int" name="studentid" class="form-control">
+                <input type="number" name="studentid" class="form-control">
             </div><br>
             <button type="submit" class="btn2" name="Search">Search</button>
         </form>
@@ -132,6 +133,7 @@ $CourseID = (isset($_POST['courseid']) ? $_POST['courseid'] : '');
 if(isset($_POST['Search'])){
     header("location:searchenrollment.php?para=$StudentID,$CourseID");
 }
+
 
 ?>
     </section>

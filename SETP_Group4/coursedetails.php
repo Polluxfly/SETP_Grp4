@@ -6,7 +6,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Course Details</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -23,6 +23,7 @@ body {
             <li><a href="coursedetails.php">Course Details</a></li>
             <li><a href="adminenrollment.php">Enrollment</a></li>
             <li><a href="enquiry.php">Enquiries</a></li>
+            <li><a href="report.php">Management Reports</a></li>
         </ul>
     </div>
         
@@ -51,11 +52,11 @@ body {
 
         <div class="form-group">
             <label>Course Fee</label>
-            <input type="int" name="coursefee" class="form-control" required>
+            <input type="number" name="coursefee" class="form-control" required>
         </div><br>
         <div class="form-group">
             <label>Duration (Month)</label>
-            <input type="int" name="duration" class="form-control" required>
+            <input type="number" name="duration" class="form-control" required>
         </div><br>
         <div class="form-group">
             <label>Teacher</label>
@@ -63,7 +64,7 @@ body {
         </div><br>
         <div class="form-group">
             <label>Batch</label>
-            <input type="int" name="batch" class="form-control" required>
+            <input type="number" name="batch" class="form-control" required>
         </div><br>
 
         <button type="submit" class="btn2" name="Add">Add</button>

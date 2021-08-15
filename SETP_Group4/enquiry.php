@@ -15,6 +15,7 @@ $enquiry = "";
 $date = "";
 $status = "";
 $action = "";
+$inchargebyid = "";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //connect to mysql database
@@ -36,6 +37,7 @@ function getData()
     $data[5]=$_POST['date'];
     $data[6]=$_POST['status'];
     $data[7]=$_POST['action'];
+    $data[8]=$_POST['inchargebyid'];
     return $data;
 }
 
@@ -51,7 +53,7 @@ body {
 </style>
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Enquiries</title>
     <link href="css/enquiry.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -63,12 +65,14 @@ body {
         
         <div class="navigation">
             <ul>
-            <li><a href="homepage.php">Home Page</a></li>
-            <li><a href="createuser.php">Registration</a></li>
-            <li><a href="profile.php">Student Profile</a></li>
-            <li><a href="coursedetails.php">Course Details</a></li>
-            <li><a href="adminenrollment.php">Enrollment</a></li>
-            <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="homepage.php">Home Page</a></li>
+                <li><a href="createuser.php">Registration</a></li>
+                <li><a href="profile.php">User Profile</a></li>
+                <li><a href="coursedetails.php">Course Details</a></li>
+                <li><a href="adminenrollment.php">Enrollment</a></li>
+                <li><a href="enquiry.php">Enquiries</a></li>
+                <li><a href="report.php">Management Reports</a></li>
+
             </ul>
         </div>
         <div class = "container">
@@ -86,7 +90,7 @@ body {
 
 if(isset($_POST['update'])){
 $info = getData();
-$update_query ="UPDATE `enquiry` SET status='$info[6]',action='$info[7]' WHERE enquiryid = '$info[0]' ";
+$update_query ="UPDATE `enquiry` SET status='$info[6]',action='$info[7]', inchargebyid = '$info[8]' WHERE enquiryid = '$info[0]' ";
 try{
     $update_result=mysqli_query($con,$update_query);
     if($update_result){
@@ -123,7 +127,7 @@ if(isset($_POST['search']))
                     $date = $rows['date'];
                     $status = $rows['status'];
                     $action = $rows['action'];
-
+                    $inchargebyid = $rows['inchargebyid'];
                    
 
 				}
@@ -169,6 +173,10 @@ if(isset($_POST['search']))
             </div><br>
             <div class="form-group">
             <input type="text" name="action" class="form-control" placeholder="Remarks" value="<?php echo ($action);?>"><br>
+            </div>
+
+            <div class="form-group">
+            <input type="text" name="inchargebyid" class="form-control" placeholder="In Charge By User ID" value="<?php echo ($inchargebyid);?>"><br>
             </div>
 
             <button class="btn2" name="update">Update</button><br><br>
@@ -234,7 +242,7 @@ if(isset($_POST['search']))
         </div>
 
 
-        <br>
+        <br><br>
 
         <div class = "container2">
             <table class="table-scroll2 small-first-col">

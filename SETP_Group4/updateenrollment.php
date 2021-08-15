@@ -56,7 +56,7 @@ body {
 
 <head>
 
-    <title>OH, Hi YO !</title>
+    <title>Update Enrollment</title>
     <link href="css/createuser.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Bootstrap/bootstrap.css">
 </head>
@@ -86,11 +86,11 @@ body {
 
                     <div class="form-group">
                         <label>Course ID</label>
-                        <input type="int" name="courseid" class="form-control" value="<?php echo ($CourseID);?>" required>
+                        <input type="number" name="courseid" class="form-control" value="<?php echo ($CourseID);?>" required>
                     </div><br>
                     <div class="form-group">
                         <label>Student ID</label>
-                        <input type="int" name="userid" class="form-control"  value="<?php echo ($StudentID);?>" required>
+                        <input type="number" name="userid" class="form-control"  value="<?php echo ($StudentID);?>" required>
                     </div><br>
 
                     <button class="btn2" name="update">Update</button><br><br>
